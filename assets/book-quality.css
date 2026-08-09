@@ -1,0 +1,49 @@
+/* Book-wide post-conversion quality rules. */
+:root { font-variant-numeric: tabular-nums lining-nums; }
+
+math, .fitb-sentence, [data-math-expression], input[data-activity-item],
+textarea[data-activity-item], select[data-activity-item] {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+math mtable { margin-inline: auto; }
+math mtd { text-align: right; }
+
+/* Activity controls must remain visible and large enough to use. */
+section[data-section-type^="activity_"] input[data-activity-item].sr-only,
+section[data-section-type^="activity_"] textarea[data-activity-item].sr-only,
+section[data-section-type^="activity_"] select[data-activity-item].sr-only {
+  position: static !important;
+  width: min(10rem, 100%) !important;
+  height: 2.75rem !important;
+  padding: .4rem .65rem !important;
+  margin-inline-start: .6rem !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: normal !important;
+  border: 2px solid #86bfe5 !important;
+  border-radius: .65rem !important;
+  background: #fff !important;
+  text-align: center !important;
+}
+
+input[data-activity-item], textarea[data-activity-item], select[data-activity-item] {
+  box-sizing: border-box;
+  min-height: 2.6rem;
+}
+
+input[data-answer-state="correct"], textarea[data-answer-state="correct"] {
+  border-color: #16803b !important;
+  background-color: #ecfdf3 !important;
+}
+
+input[data-answer-state="incorrect"], textarea[data-answer-state="incorrect"] {
+  border-color: #c62828 !important;
+  background-color: #fff1f1 !important;
+}
+
+@media (max-width: 640px) {
+  section[data-section-type^="activity_"] input[data-activity-item] {
+    max-width: 100%;
+  }
+}
