@@ -71,11 +71,13 @@ math mtd { text-align: right; }
 
 .validation-vertical-answer {
   display: block;
-  width: 6.5rem;
+  width: 6.5rem !important;
+  max-width: 100% !important;
   min-height: 2.5rem;
-  margin-top: .35rem;
-  border: 0;
-  border-bottom: 2px solid #64748b;
+  margin: .35rem 0 0 auto !important;
+  padding: .25rem .4rem !important;
+  border: 2px solid #6ee7a0 !important;
+  border-radius: .65rem !important;
   background: #fff;
   text-align: right;
   font-size: 1.2rem;

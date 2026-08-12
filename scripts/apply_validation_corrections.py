@@ -59,6 +59,7 @@ pg038_ids = ["pg038_n0024", "pg038_n0028", "pg038_n0032", "pg038_n0036",
 for item, key in enumerate(pg038_ids, 7):
     value = re.sub(r"(?:\s*=\s*\[\[blank:item-\d+\]\])+\s*$", "", texts[key])
     set_text(key, f"{value} = [[blank:item-{item}]]")
+update_answers("pg038_sec001.html", {"item-7": "2645939", "item-14": "57893868"})
 
 pg041_ids = ["pg041_n0005", "pg041_n0008", "pg041_n0011", "pg041_n0014", "pg041_n0017",
              "pg041_n0020", "pg041_n0023", "pg041_n0026", "pg041_n0029", "pg041_n0032",
@@ -174,6 +175,7 @@ for page_path in ROOT.glob("*.html"):
     page_source = page_source.replace("book-quality.css?v=4", "book-quality.css?v=5")
     page_source = page_source.replace("book-quality.css?v=5", "book-quality.css?v=6")
     page_source = page_source.replace("book-quality.css?v=6", "book-quality.css?v=7")
+    page_source = page_source.replace("book-quality.css?v=7", "book-quality.css?v=8")
     page_source = page_source.replace("book-quality.js?v=3", "book-quality.js?v=4")
     page_source = page_source.replace("book-quality.js?v=4", "book-quality.js?v=5")
     page_source = page_source.replace("book-quality.js?v=5", "book-quality.js?v=6")
@@ -183,6 +185,10 @@ for page_path in ROOT.glob("*.html"):
     page_source = page_source.replace("book-quality.js?v=9", "book-quality.js?v=10")
     page_source = page_source.replace("book-quality.js?v=10", "book-quality.js?v=11")
     page_source = page_source.replace("book-quality.js?v=11", "book-quality.js?v=12")
+    page_source = page_source.replace("book-quality.js?v=12", "book-quality.js?v=13")
+    page_source = page_source.replace("book-quality.js?v=13", "book-quality.js?v=14")
+    page_source = page_source.replace("book-quality.js?v=14", "book-quality.js?v=15")
+    page_source = page_source.replace("book-quality.js?v=15", "book-quality.js?v=16")
     page_path.write_text(page_source, encoding="utf-8")
 
 print(f"texts={len(texts)} audios={len(audios)}")

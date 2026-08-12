@@ -113,6 +113,7 @@
         const visual = document.createElement("span");
         visual.className = "validation-vertical-calculation";
         visual.setAttribute("aria-hidden", "true");
+        visual.dataset.verticalItem = `item-${item}`;
         if (fractionPairs.length === 2) {
           const fractionMarkup = parts => `<span class="validation-fraction"><span>${parts[0]}</span><span>${parts[1]}</span></span>`;
           const operator = expression.match(/\+|\-|\u00d7|\u00f7|\u2212|x/i)?.[0] || "\u00d7";
@@ -131,16 +132,45 @@
         }
       });
     };
-    const removeDuplicateAnswerFields = () => {
-      const fields = [...document.querySelectorAll("[data-activity-item]")];
-      const counts = fields.reduce((map, field) => map.set(field.dataset.activityItem, (map.get(field.dataset.activityItem) || 0) + 1), new Map());
-      fields.forEach(field => {
-        if (counts.get(field.dataset.activityItem) > 1 && field.classList.contains("validation-vertical-answer")) field.remove();
+    const organizeVerticalAnswerFields = () => {
+      document.querySelectorAll(".validation-vertical-calculation[data-vertical-item]").forEach(visual => {
+        const item = visual.dataset.verticalItem;
+        const fields = [...document.querySelectorAll(`[data-activity-item="${item}"]`)].filter(field => field !== visual);
+        if (!fields.length) return;
+        const canonical = fields.find(field => !field.classList.contains("validation-vertical-answer")) || fields[0];
+        fields.forEach(field => { if (field !== canonical) field.remove(); });
+        canonical.classList.add("validation-vertical-answer");
+        canonical.removeAttribute("style");
+        visual.insertAdjacentElement("afterend", canonical);
+        visual.parentElement?.querySelectorAll("span.border-b-2").forEach(line => {
+          if (!line.textContent.trim() && !line.querySelector("input, textarea")) {
+            const wrapper = line.parentElement;
+            line.remove();
+            if (wrapper && !wrapper.textContent.trim() && !wrapper.querySelector("input, textarea")) wrapper.remove();
+          }
+        });
+      });
+    };
+    const removeAllDuplicateAnswerFields = () => {
+      const groups = new Map();
+      document.querySelectorAll("input[data-activity-item], textarea[data-activity-item]").forEach(field => {
+        const item = field.dataset.activityItem;
+        groups.set(item, [...(groups.get(item) || []), field]);
+      });
+      groups.forEach(fields => {
+        if (fields.length < 2) return;
+        const canonical = fields.find(field => field.id?.startsWith("fitb-input-")) ||
+          fields.find(field => field.classList.contains("validation-vertical-answer")) || fields[0];
+        fields.forEach(field => { if (field !== canonical) field.remove(); });
       });
     };
     makeVerticalCalculations();
-    setTimeout(() => { makeVerticalCalculations(); removeDuplicateAnswerFields(); }, 600);
-    setTimeout(() => { makeVerticalCalculations(); removeDuplicateAnswerFields(); }, 1600);
+    setTimeout(() => { makeVerticalCalculations(); organizeVerticalAnswerFields(); }, 600);
+    setTimeout(() => { makeVerticalCalculations(); organizeVerticalAnswerFields(); }, 1600);
+    setTimeout(() => { makeVerticalCalculations(); organizeVerticalAnswerFields(); removeAllDuplicateAnswerFields(); }, 2600);
+    setTimeout(() => { makeVerticalCalculations(); organizeVerticalAnswerFields(); removeAllDuplicateAnswerFields(); }, 4200);
+    setTimeout(removeAllDuplicateAnswerFields, 2100);
+    setTimeout(removeAllDuplicateAnswerFields, 3000);
 
     /* Recover placeholders that a converter incorrectly encoded as MathML letters. */
     const insertedAfterMath = new Map();
