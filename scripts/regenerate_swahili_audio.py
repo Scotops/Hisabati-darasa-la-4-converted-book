@@ -13,12 +13,23 @@ import edge_tts
 VOICE = "sw-TZ-RehemaNeural"
 
 
+def roman_value(token):
+    values = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+    total = previous = 0
+    for character in reversed(token):
+        value = values[character]
+        total += -value if value < previous else value
+        previous = max(previous, value)
+    return str(total)
+
+
 def spoken_text(value):
     text = html.unescape(str(value))
     fraction = re.compile(r"<mfrac[^>]*>\s*<[^>]+>(.*?)</[^>]+>\s*<[^>]+>(.*?)</[^>]+>\s*</mfrac>", re.I | re.S)
     while fraction.search(text):
         text = fraction.sub(r" \1 juu ya \2 ", text)
     text = re.sub(r"<[^>]+>", " ", text)
+    text = re.sub(r"\b[IVXLCDM]+\b", lambda match: roman_value(match.group(0)), text)
     substitutions = {
         "×": " mara ", "÷": " gawanya kwa ", "−": " kutoa ",
         "=": " ni sawa na ", "<": " ni ndogo kuliko ", ">": " ni kubwa kuliko ",
@@ -52,6 +63,9 @@ async def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--workers", type=int, default=12)
     parser.add_argument("--repair-zero", action="store_true")
+    parser.add_argument("--force", action="store_true")
+    parser.add_argument("--page-from", type=int)
+    parser.add_argument("--page-to", type=int)
     parser.add_argument("--cleanup-temp", action="store_true")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
@@ -77,11 +91,21 @@ async def main():
     texts = json.loads((i18n / "texts.json").read_text(encoding="utf-8"))
     mappings = json.loads((i18n / "audios.json").read_text(encoding="utf-8"))
     target = i18n / "audio"
+    if args.page_from is not None or args.page_to is not None:
+        first = args.page_from or 1
+        last = args.page_to or 999
+        mappings = {key: name for key, name in mappings.items()
+                    if (match := re.match(r"pg(\d{3})_", key)) and first <= int(match.group(1)) <= last}
     if args.repair_zero:
         mappings = {key: name for key, name in mappings.items()
                     if not (target / name).exists() or (target / name).stat().st_size <= 500}
     temp = i18n / ("audio_repair_tmp" if args.repair_zero else "audio_rehema_tmp")
     temp.mkdir(exist_ok=True)
+    if args.force:
+        for filename in mappings.values():
+            output = temp / filename
+            if output.exists():
+                output.unlink()
     semaphore = asyncio.Semaphore(args.workers)
     jobs = [generate_one(key, texts.get(key, ""), temp / filename, semaphore)
             for key, filename in mappings.items()]

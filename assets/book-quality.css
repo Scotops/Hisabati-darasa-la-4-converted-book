@@ -9,6 +9,43 @@ textarea[data-activity-item], select[data-activity-item] {
 math mtable { margin-inline: auto; }
 math mtd { text-align: right; }
 
+.validation-source-text {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+}
+
+.validation-vertical-calculation {
+  display: inline-grid;
+  min-width: 6.5rem;
+  justify-items: end;
+  gap: .15rem;
+  font-size: 1.35rem;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.validation-vertical-calculation .validation-rule {
+  width: 100%;
+  border-top: 2px solid currentColor;
+}
+
+.validation-vertical-answer {
+  display: block;
+  width: 6.5rem;
+  min-height: 2.5rem;
+  margin-top: .35rem;
+  border: 0;
+  border-bottom: 2px solid #64748b;
+  background: #fff;
+  text-align: right;
+  font-size: 1.2rem;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
 /* Activity controls must remain visible and large enough to use. */
 section[data-section-type^="activity_"] input[data-activity-item].sr-only,
 section[data-section-type^="activity_"] textarea[data-activity-item].sr-only,
