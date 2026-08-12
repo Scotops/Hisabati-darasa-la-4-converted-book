@@ -9,6 +9,28 @@ textarea[data-activity-item], select[data-activity-item] {
 math mtable { margin-inline: auto; }
 math mtd { text-align: right; }
 
+.validation-html-math-table {
+  width: max-content;
+  max-width: 100%;
+  margin-inline: auto;
+  border-collapse: collapse;
+  table-layout: auto;
+  font: inherit;
+  line-height: 1.25;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.validation-html-math-table td {
+  min-width: 4ch;
+  padding: .08em .25em;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.validation-html-math-table td.validation-math-rule {
+  border-bottom: 2px solid currentColor;
+}
+
 .validation-source-text {
   position: absolute !important;
   width: 1px !important;

@@ -28,6 +28,51 @@
     const pageId = document.querySelector('meta[name="title-id"]')?.content;
     const alignmentPages = new Set(["pg033_sec001", "pg034_sec001", "pg035_sec001", "pg039_sec001", "pg045_sec001", "pg046_sec001", "pg057_sec001", "pg058_sec002", "pg060_sec001", "pg061_sec001", "pg062_sec001", "pg063_sec001", "pg069_sec001", "pg070_sec001", "pg071_sec001", "pg072_sec001", "pg074_sec001", "pg077_sec001", "pg079_sec001", "pg082_sec001", "pg121_sec002", "pg123_sec001", "pg154_sec001", "pg155_sec001", "pg156_sec001", "pg157_sec001", "pg157_sec002", "pg159_sec001", "pg160_sec002", "pg161_sec001", "pg162_sec001", "pg170_sec001", "pg170_sec002", "pg171_sec001", "pg179_sec002", "pg180_sec002", "pg183_sec002"]);
     if (alignmentPages.has(pageId)) document.documentElement.classList.add("validation-alignment-page");
+    const renderConvertedMathTables = () => {
+      document.querySelectorAll("math mtable").forEach(mathTable => {
+        if (mathTable.dataset.htmlTableRendered === "true") return;
+        const table = document.createElement("table");
+        table.className = "validation-html-math-table";
+        [...mathTable.querySelectorAll(":scope > mtr")].forEach(mathRow => {
+          const row = document.createElement("tr");
+          [...mathRow.querySelectorAll(":scope > mtd")].forEach(mathCell => {
+            const cell = document.createElement("td");
+            cell.textContent = mathCell.textContent.replace(/\u00a0/g, " ").trim();
+            if ((mathCell.getAttribute("style") || "").includes("border-bottom")) cell.classList.add("validation-math-rule");
+            row.appendChild(cell);
+          });
+          table.appendChild(row);
+        });
+        mathTable.dataset.htmlTableRendered = "true";
+        mathTable.closest("math")?.replaceWith(table);
+      });
+    };
+    renderConvertedMathTables();
+    setTimeout(renderConvertedMathTables, 700);
+    setTimeout(renderConvertedMathTables, 1700);
+    const knownStackedCalculations = {
+      pg035_sec001: { pg035_n0007: ["3125", "\u00d7 12", "6250", "+ 31250", "37500"] },
+      pg039_sec001: { pg039_n0008: ["5624", "\u00d7 24", "22496", "+ 112480", "134976"] },
+      pg170_sec001: { pg170_n0005: ["sh 5500", "\u00d7 20", "0000", "+ 110000", "sh 110000"] }
+    };
+    const renderKnownStackedCalculations = () => {
+      Object.entries(knownStackedCalculations[pageId] || {}).forEach(([id, rows]) => {
+        const source = document.querySelector(`[data-id="${id}"]`);
+        if (!source || source.querySelector(".validation-known-calculation")) return;
+        const table = document.createElement("table");
+        table.className = "validation-html-math-table validation-known-calculation";
+        rows.forEach((value, index) => {
+          const row = table.insertRow();
+          const cell = row.insertCell();
+          cell.textContent = value;
+          if (index === 1 || index === 3) cell.classList.add("validation-math-rule");
+        });
+        source.replaceChildren(table);
+      });
+    };
+    renderKnownStackedCalculations();
+    setTimeout(renderKnownStackedCalculations, 700);
+    setTimeout(renderKnownStackedCalculations, 1700);
     const reviewedTextIds = {
       pg053_sec003: Array.from({ length: 11 }, (_, i) => `pg053_n${String(30 + i * 2).padStart(4, "0")}`),
       pg106_sec001: ["pg106_n0006", "pg106_n0018", "pg106_n0019", "pg106_n0020", "pg106_n0021"],
