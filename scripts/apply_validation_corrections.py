@@ -50,21 +50,22 @@ pg032 = {
     "pg032_n0049": (15, 65 * 24),
 }
 for key, (item, answer) in pg032.items():
-    value = re.sub(r"\s*=\s*\[\[blank:item-\d+\]\]\s*$", "", texts[key])
+    value = re.sub(r"(?:\s*=\s*\[\[blank:item-\d+\]\])+\s*$", "", texts[key])
     set_text(key, f"{value} = [[blank:item-{item}]]")
 update_answers("pg032_sec001.html", {f"item-{item}": str(answer) for item, answer in (v for v in pg032.values())})
 
 pg038_ids = ["pg038_n0024", "pg038_n0028", "pg038_n0032", "pg038_n0036",
              "pg038_n0040", "pg038_n0044", "pg038_n0048", "pg038_n0052"]
 for item, key in enumerate(pg038_ids, 7):
-    value = re.sub(r"\s*=\s*\[\[blank:item-\d+\]\]\s*$", "", texts[key])
+    value = re.sub(r"(?:\s*=\s*\[\[blank:item-\d+\]\])+\s*$", "", texts[key])
     set_text(key, f"{value} = [[blank:item-{item}]]")
 
 pg041_ids = ["pg041_n0005", "pg041_n0008", "pg041_n0011", "pg041_n0014", "pg041_n0017",
              "pg041_n0020", "pg041_n0023", "pg041_n0026", "pg041_n0029", "pg041_n0032",
              "pg041_n0035", "pg041_n0038", "pg041_n0041", "pg041_n0044", "pg041_n0047"]
 for item, key in enumerate(pg041_ids, 1):
-    value = re.sub(r"\s*=\s*$", "", texts[key])
+    value = re.sub(r"(?:\s*=\s*\[\[blank:item-\d+\]\])+\s*$", "", texts[key])
+    value = re.sub(r"\s*=\s*$", "", value)
     set_text(key, f"{value} = [[blank:item-{item}]]")
 
 # Use the standard division sign rather than a long-division bracket in exercises.
@@ -170,9 +171,15 @@ for file_name, ids in reviewed_ids.items():
 for page_path in ROOT.glob("*.html"):
     page_source = page_path.read_text(encoding="utf-8")
     page_source = page_source.replace("book-quality.css?v=3", "book-quality.css?v=4")
+    page_source = page_source.replace("book-quality.css?v=4", "book-quality.css?v=5")
+    page_source = page_source.replace("book-quality.css?v=5", "book-quality.css?v=6")
     page_source = page_source.replace("book-quality.js?v=3", "book-quality.js?v=4")
     page_source = page_source.replace("book-quality.js?v=4", "book-quality.js?v=5")
     page_source = page_source.replace("book-quality.js?v=5", "book-quality.js?v=6")
+    page_source = page_source.replace("book-quality.js?v=6", "book-quality.js?v=7")
+    page_source = page_source.replace("book-quality.js?v=7", "book-quality.js?v=8")
+    page_source = page_source.replace("book-quality.js?v=8", "book-quality.js?v=9")
+    page_source = page_source.replace("book-quality.js?v=9", "book-quality.js?v=10")
     page_path.write_text(page_source, encoding="utf-8")
 
 print(f"texts={len(texts)} audios={len(audios)}")

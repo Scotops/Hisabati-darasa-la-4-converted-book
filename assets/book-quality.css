@@ -33,6 +33,20 @@ math mtd { text-align: right; }
   border-top: 2px solid currentColor;
 }
 
+.validation-fraction {
+  display: inline-grid;
+  grid-template-rows: auto auto;
+  min-width: 1.6em;
+  vertical-align: middle;
+  text-align: center;
+  line-height: 1;
+}
+
+.validation-fraction > span:first-child {
+  border-bottom: 1px solid currentColor;
+  padding-bottom: .08em;
+}
+
 .validation-vertical-answer {
   display: block;
   width: 6.5rem;
@@ -43,6 +57,25 @@ math mtd { text-align: right; }
   background: #fff;
   text-align: right;
   font-size: 1.2rem;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* Align converted place-value and measurement tables on reviewed pages. */
+.validation-alignment-page #content [class*="grid-cols"] {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.validation-alignment-page #content [class*="grid-cols"] > span,
+.validation-alignment-page #content [class*="grid-cols"] > div {
+  box-sizing: border-box;
+}
+
+.validation-alignment-page #content [class*="grid-cols"] > span {
+  min-width: 2.25ch;
+  text-align: right;
+}
+
+.validation-alignment-page #content .fitb-sentence {
   font-variant-numeric: tabular-nums lining-nums;
 }
 
