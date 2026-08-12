@@ -23,13 +23,36 @@ def roman_value(token):
     return str(total)
 
 
+def swahili_number(value):
+    units = ["sifuri", "moja", "mbili", "tatu", "nne", "tano", "sita", "saba", "nane", "tisa"]
+    tens = {10: "kumi", 20: "ishirini", 30: "thelathini", 40: "arobaini",
+            50: "hamsini", 60: "sitini", 70: "sabini", 80: "themanini", 90: "tisini"}
+    if value < 10:
+        return units[value]
+    if value < 100:
+        decade, unit = divmod(value, 10)
+        base = tens[decade * 10]
+        return base if unit == 0 else f"{base} na {units[unit]}"
+    if value < 1000:
+        hundred, remainder = divmod(value, 100)
+        base = f"mia {units[hundred]}"
+        return base if remainder == 0 else f"{base} na {swahili_number(remainder)}"
+    if value == 1000:
+        return "elfu moja"
+    return str(value)
+
+
+def roman_spoken(token):
+    return f"{swahili_number(int(roman_value(token)))} ya Kirumi"
+
+
 def spoken_text(value):
     text = html.unescape(str(value))
     fraction = re.compile(r"<mfrac[^>]*>\s*<[^>]+>(.*?)</[^>]+>\s*<[^>]+>(.*?)</[^>]+>\s*</mfrac>", re.I | re.S)
     while fraction.search(text):
         text = fraction.sub(r" \1 juu ya \2 ", text)
     text = re.sub(r"<[^>]+>", " ", text)
-    text = re.sub(r"\b[IVXLCDM]+\b", lambda match: roman_value(match.group(0)), text)
+    text = re.sub(r"\b[IVXLCDM]+\b", lambda match: roman_spoken(match.group(0)), text)
     substitutions = {
         "×": " mara ", "÷": " gawanya kwa ", "−": " kutoa ",
         "=": " ni sawa na ", "<": " ni ndogo kuliko ", ">": " ni kubwa kuliko ",
@@ -85,7 +108,10 @@ async def main():
                 break
             await asyncio.sleep(.5)
         if old_temp.exists():
-            old_temp.rmdir()
+            try:
+                old_temp.rmdir()
+            except PermissionError:
+                pass
         print("Removed temporary audio generation files.")
         return
     texts = json.loads((i18n / "texts.json").read_text(encoding="utf-8"))
@@ -133,7 +159,10 @@ async def main():
                         raise
                     time.sleep(.4)
             source.unlink()
-    temp.rmdir()
+    try:
+        temp.rmdir()
+    except PermissionError:
+        pass
     print(f"Replaced {len(mappings)} audio files with {VOICE}.")
 
 
