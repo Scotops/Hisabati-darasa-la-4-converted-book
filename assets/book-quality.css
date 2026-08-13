@@ -50,6 +50,34 @@ math mtd { text-align: right; }
   font-variant-numeric: tabular-nums lining-nums;
 }
 
+.validation-vertical-stack {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  min-width: 6.5rem;
+  vertical-align: top;
+}
+
+.validation-vertical-stack > input[data-activity-item],
+.validation-vertical-stack > textarea[data-activity-item] {
+  position: relative !important;
+  display: block !important;
+  width: 6.5rem !important;
+  height: 2.75rem !important;
+  margin: .35rem 0 0 !important;
+  padding: .25rem .4rem !important;
+  overflow: visible !important;
+  clip: auto !important;
+  clip-path: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  border: 2px solid #22c55e !important;
+  border-radius: .65rem !important;
+  background: #fff !important;
+  z-index: 5;
+}
+
 .validation-vertical-calculation .validation-rule {
   width: 100%;
   border-top: 2px solid currentColor;

@@ -176,6 +176,8 @@ for page_path in ROOT.glob("*.html"):
     page_source = page_source.replace("book-quality.css?v=5", "book-quality.css?v=6")
     page_source = page_source.replace("book-quality.css?v=6", "book-quality.css?v=7")
     page_source = page_source.replace("book-quality.css?v=7", "book-quality.css?v=8")
+    page_source = page_source.replace("book-quality.css?v=8", "book-quality.css?v=9")
+    page_source = page_source.replace("book-quality.css?v=9", "book-quality.css?v=10")
     page_source = page_source.replace("book-quality.js?v=3", "book-quality.js?v=4")
     page_source = page_source.replace("book-quality.js?v=4", "book-quality.js?v=5")
     page_source = page_source.replace("book-quality.js?v=5", "book-quality.js?v=6")
@@ -189,6 +191,8 @@ for page_path in ROOT.glob("*.html"):
     page_source = page_source.replace("book-quality.js?v=13", "book-quality.js?v=14")
     page_source = page_source.replace("book-quality.js?v=14", "book-quality.js?v=15")
     page_source = page_source.replace("book-quality.js?v=15", "book-quality.js?v=16")
+    page_source = page_source.replace("book-quality.js?v=16", "book-quality.js?v=17")
+    page_source = page_source.replace("book-quality.js?v=17", "book-quality.js?v=18")
     page_path.write_text(page_source, encoding="utf-8")
 
 print(f"texts={len(texts)} audios={len(audios)}")

@@ -141,8 +141,15 @@
         fields.forEach(field => { if (field !== canonical) field.remove(); });
         canonical.classList.add("validation-vertical-answer");
         canonical.removeAttribute("style");
-        visual.insertAdjacentElement("afterend", canonical);
-        visual.parentElement?.querySelectorAll("span.border-b-2").forEach(line => {
+        let stack = visual.closest(".validation-vertical-stack");
+        if (!stack) {
+          stack = document.createElement("span");
+          stack.className = "validation-vertical-stack";
+          visual.insertAdjacentElement("beforebegin", stack);
+          stack.appendChild(visual);
+        }
+        if (canonical.parentElement !== stack || canonical.previousElementSibling !== visual) stack.appendChild(canonical);
+        stack.parentElement?.querySelectorAll("span.border-b-2").forEach(line => {
           if (!line.textContent.trim() && !line.querySelector("input, textarea")) {
             const wrapper = line.parentElement;
             line.remove();
@@ -171,6 +178,18 @@
     setTimeout(() => { makeVerticalCalculations(); organizeVerticalAnswerFields(); removeAllDuplicateAnswerFields(); }, 4200);
     setTimeout(removeAllDuplicateAnswerFields, 2100);
     setTimeout(removeAllDuplicateAnswerFields, 3000);
+    if (verticalPages[pageId]?.length) {
+      let repairTimer;
+      const content = document.getElementById("content");
+      if (content) new MutationObserver(() => {
+        clearTimeout(repairTimer);
+        repairTimer = setTimeout(() => {
+          makeVerticalCalculations();
+          organizeVerticalAnswerFields();
+          removeAllDuplicateAnswerFields();
+        }, 180);
+      }).observe(content, { childList: true, subtree: true, characterData: true });
+    }
 
     /* Recover placeholders that a converter incorrectly encoded as MathML letters. */
     const insertedAfterMath = new Map();
