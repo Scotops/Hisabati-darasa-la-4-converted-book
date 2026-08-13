@@ -70,6 +70,27 @@ def roman_spoken(token):
 
 def spoken_text(value):
     text = html.unescape(str(value))
+    text = re.sub(
+        r"<mfrac[^>]*>\s*<mn[^>]*>1</mn>\s*<mn[^>]*>2</mn>\s*</mfrac>",
+        " nusu ",
+        text,
+        flags=re.I | re.S,
+    )
+    text = re.sub(
+        r"<mfrac[^>]*>\s*<mn[^>]*>1</mn>\s*<mn[^>]*>(\d+)</mn>\s*</mfrac>",
+        r" moja ya \1 ",
+        text,
+        flags=re.I | re.S,
+    )
+    # Preserve the mathematical meaning of MathML square-unit notation before
+    # tags are stripped. Otherwise m² is flattened to "m 2" and spoken wrongly.
+    mathml_square_units = (
+        (r"<math[^>]*>\s*<mrow[^>]*>\s*<mi[^>]*>m</mi>\s*<msup[^>]*>\s*<mi[^>]*>m</mi>\s*<mn[^>]*>2</mn>\s*</msup>\s*</mrow>\s*</math>", "milimeta za mraba"),
+        (r"<math[^>]*>\s*<mrow[^>]*>\s*<mi[^>]*>s</mi>\s*<msup[^>]*>\s*<mi[^>]*>m</mi>\s*<mn[^>]*>2</mn>\s*</msup>\s*</mrow>\s*</math>", "sentimeta za mraba"),
+        (r"<math[^>]*>\s*<msup[^>]*>\s*<mi[^>]*>m</mi>\s*<mn[^>]*>2</mn>\s*</msup>\s*</math>", "meta za mraba"),
+    )
+    for pattern, replacement in mathml_square_units:
+        text = re.sub(pattern, replacement, text, flags=re.I | re.S)
     fraction = re.compile(r"<mfrac[^>]*>\s*<[^>]+>(.*?)</[^>]+>\s*<[^>]+>(.*?)</[^>]+>\s*</mfrac>", re.I | re.S)
     while fraction.search(text):
         text = fraction.sub(r" \1 juu ya \2 ", text)

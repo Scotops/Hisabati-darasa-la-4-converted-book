@@ -88,7 +88,6 @@
       }).observe(stackedContent, { childList: true, subtree: true, characterData: true });
     }
     const reviewedTextIds = {
-      pg053_sec003: Array.from({ length: 11 }, (_, i) => `pg053_n${String(30 + i * 2).padStart(4, "0")}`),
       pg106_sec001: ["pg106_n0006", "pg106_n0018", "pg106_n0019", "pg106_n0020", "pg106_n0021"],
       pg127_sec001: ["pg127_n0011", "pg127_n0013", "pg127_n0014", "pg127_n0015", "pg127_n0016", "pg127_n0021", "pg127_n0026"],
       pg133_sec001: ["pg133_n0003", "pg133_n0004", "pg133_n0012", "pg133_n0014", "pg133_n0016", "pg133_n0018", "pg133_n0020", "pg133_n0022", "pg133_n0024", "pg133_n0026", "pg133_n0028"],
@@ -128,7 +127,19 @@
         visual.className = "validation-vertical-calculation";
         visual.setAttribute("aria-hidden", "true");
         visual.dataset.verticalItem = `item-${item}`;
-        if (fractionPairs.length === 2) {
+        if (pageId === "pg183_sec002" && source.dataset.display) {
+          const lines = source.dataset.display.split(/\r?\n/).map(line => line.trimEnd());
+          const upper = document.createElement("span");
+          upper.style.whiteSpace = "pre";
+          upper.textContent = lines.slice(0, -1).join("\n");
+          const lower = document.createElement("span");
+          lower.style.whiteSpace = "pre";
+          lower.textContent = lines.at(-1) || "";
+          visual.replaceChildren(upper, lower);
+          const rule = document.createElement("span");
+          rule.className = "validation-rule";
+          visual.append(rule);
+        } else if (fractionPairs.length === 2) {
           const fractionMarkup = parts => `<span class="validation-fraction"><span>${parts[0]}</span><span>${parts[1]}</span></span>`;
           const operator = expression.match(/\+|\-|\u00d7|\u00f7|\u2212|x/i)?.[0] || "\u00d7";
           visual.innerHTML = `<span>${fractionMarkup(fractionPairs[0])}</span><span>${operator} ${fractionMarkup(fractionPairs[1])}</span><span class="validation-rule"></span>`;
