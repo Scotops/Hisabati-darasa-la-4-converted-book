@@ -13,6 +13,10 @@ import edge_tts
 VOICE = "sw-TZ-RehemaNeural"
 
 
+def physical_audio_name(mapped_name):
+    return mapped_name.split("?", 1)[0]
+
+
 def roman_value(token):
     values = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
     total = previous = 0
@@ -112,6 +116,8 @@ async def main():
     parser.add_argument("--page-to", type=int)
     parser.add_argument("--numbers-only", action="store_true")
     parser.add_argument("--adjacent-numbers-only", action="store_true")
+    parser.add_argument("--cache-version")
+    parser.add_argument("--version-only", action="store_true")
     parser.add_argument("--cleanup-temp", action="store_true")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
@@ -138,7 +144,9 @@ async def main():
         print("Removed temporary audio generation files.")
         return
     texts = json.loads((i18n / "texts.json").read_text(encoding="utf-8"))
-    mappings = json.loads((i18n / "audios.json").read_text(encoding="utf-8"))
+    audios_path = i18n / "audios.json"
+    all_mappings = json.loads(audios_path.read_text(encoding="utf-8"))
+    mappings = dict(all_mappings)
     target = i18n / "audio"
     if args.numbers_only:
         mappings = {key: name for key, name in mappings.items()
@@ -147,6 +155,15 @@ async def main():
         mappings = {key: name for key, name in mappings.items()
                     if re.search(r"(?:[A-Za-z]\d|\d[A-Za-z]|\[\[blank:item-\d+\]\])",
                                  str(texts.get(key, "")))}
+    if args.version_only:
+        if not args.cache_version:
+            raise SystemExit("--version-only requires --cache-version")
+        for key, mapped_name in mappings.items():
+            all_mappings[key] = f"{physical_audio_name(mapped_name)}?v={args.cache_version}"
+        audios_path.write_text(json.dumps(all_mappings, ensure_ascii=False, indent=2) + "\n",
+                               encoding="utf-8")
+        print(f"Versioned {len(mappings)} audio mappings with {args.cache_version}.")
+        return
     if args.page_from is not None or args.page_to is not None:
         first = args.page_from or 1
         last = args.page_to or 999
@@ -154,16 +171,17 @@ async def main():
                     if (match := re.match(r"pg(\d{3})_", key)) and first <= int(match.group(1)) <= last}
     if args.repair_zero:
         mappings = {key: name for key, name in mappings.items()
-                    if not (target / name).exists() or (target / name).stat().st_size <= 500}
+                    if not (target / physical_audio_name(name)).exists()
+                    or (target / physical_audio_name(name)).stat().st_size <= 500}
     temp = i18n / ("audio_repair_tmp" if args.repair_zero else "audio_rehema_tmp")
     temp.mkdir(exist_ok=True)
     if args.force:
         for filename in mappings.values():
-            output = temp / filename
+            output = temp / physical_audio_name(filename)
             if output.exists():
                 output.unlink()
     semaphore = asyncio.Semaphore(args.workers)
-    jobs = [generate_one(key, texts.get(key, ""), temp / filename, semaphore)
+    jobs = [generate_one(key, texts.get(key, ""), temp / physical_audio_name(filename), semaphore)
             for key, filename in mappings.items()]
     failures = []
     done = 0
@@ -178,11 +196,12 @@ async def main():
         (temp / "failures.json").write_text(json.dumps(failures, ensure_ascii=False, indent=2), encoding="utf-8")
         raise SystemExit(f"Audio generation incomplete: {len(failures)} failures")
     for filename in mappings.values():
-        source = temp / filename
+        physical_name = physical_audio_name(filename)
+        source = temp / physical_name
         if source.exists():
             for attempt in range(8):
                 try:
-                    shutil.copy2(source, target / filename)
+                    shutil.copy2(source, target / physical_name)
                     break
                 except PermissionError:
                     if attempt == 7:
@@ -193,6 +212,11 @@ async def main():
         temp.rmdir()
     except PermissionError:
         pass
+    if args.cache_version:
+        for key, mapped_name in mappings.items():
+            all_mappings[key] = f"{physical_audio_name(mapped_name)}?v={args.cache_version}"
+        audios_path.write_text(json.dumps(all_mappings, ensure_ascii=False, indent=2) + "\n",
+                               encoding="utf-8")
     print(f"Replaced {len(mappings)} audio files with {VOICE}.")
 
 
