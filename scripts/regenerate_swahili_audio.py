@@ -74,6 +74,25 @@ def spoken_text(value):
     while fraction.search(text):
         text = fraction.sub(r" \1 juu ya \2 ", text)
     text = re.sub(r"<[^>]+>", " ", text)
+    # Expand mathematical and measurement abbreviations before converting digits.
+    # Longer units must be replaced first so that, for example, m\u00b2 is not read as m.
+    unit_patterns = (
+        (r"\bmm\s*[\u00b2\u00b3]\b", {"\u00b2": "milimeta za mraba", "\u00b3": "milimeta za ujazo"}),
+        (r"\bsm\s*[\u00b2\u00b3]\b", {"\u00b2": "sentimeta za mraba", "\u00b3": "sentimeta za ujazo"}),
+        (r"\bm\s*[\u00b2\u00b3]\b", {"\u00b2": "meta za mraba", "\u00b3": "meta za ujazo"}),
+    )
+    for pattern, names in unit_patterns:
+        text = re.sub(pattern, lambda match: names["\u00b2" if "\u00b2" in match.group(0) else "\u00b3"], text, flags=re.I)
+    simple_units = (
+        (r"\bmL\b", "mililita"), (r"\bkm\b", "kilometa"),
+        (r"\bsm\b", "sentimeta"), (r"\bmm\b", "milimeta"),
+        (r"\bkg\b", "kilogramu"), (r"\bhg\b", "hektogramu"),
+        (r"\bg\b", "gramu"), (r"\bL\b", "lita"),
+        (r"\bsh\b", "shilingi"), (r"\bst\b", "senti"),
+        (r"\bm\b", "meta"),
+    )
+    for pattern, replacement in simple_units:
+        text = re.sub(pattern, replacement, text, flags=re.I)
     text = re.sub(r"\b[IVXLCDM]+\b", lambda match: roman_spoken(match.group(0)), text)
     text = re.sub(r"\[\[blank:item-\d+\]\]", " nafasi ya jibu ", text)
     text = re.sub(r"\d[\d,]*(?:\.\d+)?",
@@ -81,6 +100,7 @@ def spoken_text(value):
     substitutions = {
         "×": " mara ", "÷": " gawanya kwa ", "−": " kutoa ", "-": " kutoa ",
         "×": " mara ", "÷": " gawanya kwa ", "−": " kutoa ",
+        "\u00d7": " mara ", "\u00f7": " gawanya kwa ", "\u2212": " kutoa ", "/": " gawanya kwa ",
         "=": " ni sawa na ", "<": " ni ndogo kuliko ", ">": " ni kubwa kuliko ",
         "+": " jumlisha ", "%": " asilimia ",
     }
@@ -119,6 +139,7 @@ async def main():
     parser.add_argument("--cache-version")
     parser.add_argument("--version-only", action="store_true")
     parser.add_argument("--cleanup-temp", action="store_true")
+    parser.add_argument("--keys-file")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     i18n = root / "content" / "i18n" / "sw-TZ"
@@ -147,6 +168,9 @@ async def main():
     audios_path = i18n / "audios.json"
     all_mappings = json.loads(audios_path.read_text(encoding="utf-8"))
     mappings = dict(all_mappings)
+    if args.keys_file:
+        selected = {line.strip() for line in Path(args.keys_file).read_text(encoding="utf-8").splitlines() if line.strip()}
+        mappings = {key: name for key, name in mappings.items() if key in selected}
     target = i18n / "audio"
     if args.numbers_only:
         mappings = {key: name for key, name in mappings.items()
