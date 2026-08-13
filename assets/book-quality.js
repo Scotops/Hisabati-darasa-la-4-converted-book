@@ -51,6 +51,7 @@
     setTimeout(renderConvertedMathTables, 700);
     setTimeout(renderConvertedMathTables, 1700);
     const knownStackedCalculations = {
+      pg034_sec001: { pg034_n0006: ["624", "\u00d7 35", "3120", "+ 18720", "21840"] },
       pg035_sec001: { pg035_n0007: ["3125", "\u00d7 12", "6250", "+ 31250", "37500"] },
       pg039_sec001: { pg039_n0008: ["5624", "\u00d7 24", "22496", "+ 112480", "134976"] },
       pg170_sec001: { pg170_n0005: ["sh 5500", "\u00d7 20", "0000", "+ 110000", "sh 110000"] }
@@ -73,6 +74,17 @@
     renderKnownStackedCalculations();
     setTimeout(renderKnownStackedCalculations, 700);
     setTimeout(renderKnownStackedCalculations, 1700);
+    if (knownStackedCalculations[pageId]) {
+      let stackedRepairTimer;
+      const stackedContent = document.getElementById("content");
+      if (stackedContent) new MutationObserver(() => {
+        clearTimeout(stackedRepairTimer);
+        stackedRepairTimer = setTimeout(() => {
+          renderConvertedMathTables();
+          renderKnownStackedCalculations();
+        }, 80);
+      }).observe(stackedContent, { childList: true, subtree: true, characterData: true });
+    }
     const reviewedTextIds = {
       pg053_sec003: Array.from({ length: 11 }, (_, i) => `pg053_n${String(30 + i * 2).padStart(4, "0")}`),
       pg106_sec001: ["pg106_n0006", "pg106_n0018", "pg106_n0019", "pg106_n0020", "pg106_n0021"],

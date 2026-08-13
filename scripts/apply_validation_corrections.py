@@ -193,6 +193,7 @@ for page_path in ROOT.glob("*.html"):
     page_source = page_source.replace("book-quality.js?v=15", "book-quality.js?v=16")
     page_source = page_source.replace("book-quality.js?v=16", "book-quality.js?v=17")
     page_source = page_source.replace("book-quality.js?v=17", "book-quality.js?v=18")
+    page_source = page_source.replace("book-quality.js?v=18", "book-quality.js?v=19")
     page_path.write_text(page_source, encoding="utf-8")
 
 print(f"texts={len(texts)} audios={len(audios)}")
