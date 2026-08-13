@@ -37,9 +37,27 @@ def swahili_number(value):
         hundred, remainder = divmod(value, 100)
         base = f"mia {units[hundred]}"
         return base if remainder == 0 else f"{base} na {swahili_number(remainder)}"
-    if value == 1000:
-        return "elfu moja"
-    return str(value)
+    scales = (
+        (1_000_000_000, "bilioni"),
+        (1_000_000, "milioni"),
+        (100_000, "laki"),
+        (1_000, "elfu"),
+    )
+    for divisor, name in scales:
+        if value >= divisor:
+            group, remainder = divmod(value, divisor)
+            base = f"{name} {swahili_number(group)}"
+            return base if remainder == 0 else f"{base} {swahili_number(remainder)}"
+    raise ValueError(f"Namba hasi haitumiki hapa: {value}")
+
+
+def spoken_number(token):
+    normalized = token.replace(",", "")
+    if "." not in normalized:
+        return swahili_number(int(normalized))
+    whole, decimal = normalized.split(".", 1)
+    decimal_words = " ".join(swahili_number(int(digit)) for digit in decimal)
+    return f"{swahili_number(int(whole))} nukta {decimal_words}"
 
 
 def roman_spoken(token):
@@ -53,14 +71,17 @@ def spoken_text(value):
         text = fraction.sub(r" \1 juu ya \2 ", text)
     text = re.sub(r"<[^>]+>", " ", text)
     text = re.sub(r"\b[IVXLCDM]+\b", lambda match: roman_spoken(match.group(0)), text)
+    text = re.sub(r"\[\[blank:item-\d+\]\]", " nafasi ya jibu ", text)
+    text = re.sub(r"\d[\d,]*(?:\.\d+)?",
+                  lambda match: spoken_number(match.group(0)), text)
     substitutions = {
+        "×": " mara ", "÷": " gawanya kwa ", "−": " kutoa ", "-": " kutoa ",
         "×": " mara ", "÷": " gawanya kwa ", "−": " kutoa ",
         "=": " ni sawa na ", "<": " ni ndogo kuliko ", ">": " ni kubwa kuliko ",
-        "+": " jumlisha ",
+        "+": " jumlisha ", "%": " asilimia ",
     }
     for symbol, words in substitutions.items():
         text = text.replace(symbol, words)
-    text = re.sub(r"\[\[blank:item-\d+\]\]", " nafasi ya jibu ", text)
     return re.sub(r"\s+", " ", text).strip()
 
 
@@ -89,6 +110,8 @@ async def main():
     parser.add_argument("--force", action="store_true")
     parser.add_argument("--page-from", type=int)
     parser.add_argument("--page-to", type=int)
+    parser.add_argument("--numbers-only", action="store_true")
+    parser.add_argument("--adjacent-numbers-only", action="store_true")
     parser.add_argument("--cleanup-temp", action="store_true")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
@@ -117,6 +140,13 @@ async def main():
     texts = json.loads((i18n / "texts.json").read_text(encoding="utf-8"))
     mappings = json.loads((i18n / "audios.json").read_text(encoding="utf-8"))
     target = i18n / "audio"
+    if args.numbers_only:
+        mappings = {key: name for key, name in mappings.items()
+                    if re.search(r"\d", str(texts.get(key, "")))}
+    if args.adjacent_numbers_only:
+        mappings = {key: name for key, name in mappings.items()
+                    if re.search(r"(?:[A-Za-z]\d|\d[A-Za-z]|\[\[blank:item-\d+\]\])",
+                                 str(texts.get(key, "")))}
     if args.page_from is not None or args.page_to is not None:
         first = args.page_from or 1
         last = args.page_to or 999
