@@ -339,3 +339,25 @@ input[data-answer-state="incorrect"], textarea[data-answer-state="incorrect"] {
 .metric-answer-slot:has(.border-red-500) {
   border-bottom-color: #ef4444;
 }
+
+/* Stable place-value columns throughout the book.  These rows were emitted
+   with preserved spaces by the converter; a proportional typeface makes the
+   numerals wander between headings such as km/hm/m, saa/dakika and sh/st. */
+#content .validation-spaced-calculation {
+  font-family: "Courier New", Courier, ui-monospace, monospace !important;
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: 0 !important;
+  word-spacing: 0 !important;
+  white-space: pre !important;
+}
+
+/* The converted mathematical structures should use lining, equal-width
+   numerals even when they are already represented by grids or tables. */
+#content .validation-html-math-table,
+#content .validation-vertical-calculation,
+#content .metric-inline-row,
+#content .chapter-long-division,
+#content .chapter-long-division-work,
+#content pre {
+  font-variant-numeric: tabular-nums lining-nums;
+}

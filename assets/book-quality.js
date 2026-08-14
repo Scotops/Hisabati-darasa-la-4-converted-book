@@ -27,6 +27,47 @@
       pg183_sec002: ["pg183_n0028", "pg183_n0031", "pg183_n0034", "pg183_n0037", "pg183_n0040", "pg183_n0043", "pg183_n0046"]
     };
     const pageId = document.querySelector('meta[name="title-id"]')?.content;
+
+    /*
+     * A number of converted place-value calculations use preserved spaces to
+     * keep unit columns together (for example "tani   kg" / "12   740").
+     * The page font is proportional, so those columns can drift when the
+     * reader changes font size or read-aloud wraps the current word.  Mark
+     * every such mathematical row for a fixed-width rendering.  Keeping the
+     * data-id on the original node preserves the exact narration and i18n
+     * lookup while the CSS makes the visible columns deterministic.
+     */
+    const stabilizeSpacedCalculations = () => {
+      document.querySelectorAll("#content .whitespace-pre").forEach(node => {
+        const value = node.textContent.replace(/\u00a0/g, " ").trimEnd();
+        /* texts.json normalizes repeated spaces before this safeguard runs,
+           so accept a single surviving separator as well.  Restricting the
+           rule to whitespace-pre mathematical rows keeps ordinary prose out. */
+        const hasColumnGap = /\S\s+\S/.test(value);
+        const isMathematical = /\d/.test(value) ||
+          /(?:^|\s)(?:km|hm|dam|m|dm|sm|mm|tani|t|kg|hg|dag|g|dg|sg|mg|L|mL|sh|st)(?:\s|$)/i.test(value);
+        if (hasColumnGap && isMathematical) {
+          node.classList.add("validation-spaced-calculation");
+          /* Inline the essential alignment properties as a cache-safe
+             fallback for offline readers that retain an older stylesheet. */
+          node.style.setProperty("font-family", '"Courier New", Courier, ui-monospace, monospace', "important");
+          node.style.setProperty("font-variant-numeric", "tabular-nums lining-nums");
+          node.style.setProperty("letter-spacing", "0", "important");
+          node.style.setProperty("word-spacing", "0", "important");
+        }
+      });
+    };
+    stabilizeSpacedCalculations();
+    setTimeout(stabilizeSpacedCalculations, 700);
+    setTimeout(stabilizeSpacedCalculations, 1700);
+    const alignmentContent = document.getElementById("content");
+    if (alignmentContent) {
+      let spacingRepairTimer;
+      new MutationObserver(() => {
+        clearTimeout(spacingRepairTimer);
+        spacingRepairTimer = setTimeout(stabilizeSpacedCalculations, 80);
+      }).observe(alignmentContent, { childList: true, subtree: true, characterData: true });
+    }
     const alignmentPages = new Set(["pg033_sec001", "pg034_sec001", "pg035_sec001", "pg039_sec001", "pg045_sec001", "pg046_sec001", "pg057_sec001", "pg058_sec002", "pg060_sec001", "pg061_sec001", "pg062_sec001", "pg063_sec001", "pg069_sec001", "pg070_sec001", "pg071_sec001", "pg072_sec001", "pg074_sec001", "pg077_sec001", "pg079_sec001", "pg082_sec001", "pg121_sec002", "pg123_sec001", "pg154_sec001", "pg155_sec001", "pg156_sec001", "pg157_sec001", "pg157_sec002", "pg159_sec001", "pg160_sec002", "pg161_sec001", "pg162_sec001", "pg170_sec001", "pg170_sec002", "pg171_sec001", "pg179_sec002", "pg180_sec002", "pg183_sec002"]);
     if (alignmentPages.has(pageId)) document.documentElement.classList.add("validation-alignment-page");
     const renderConvertedMathTables = () => {
