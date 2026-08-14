@@ -125,12 +125,13 @@ def spoken_text(value):
     for pattern, names in unit_patterns:
         text = re.sub(pattern, lambda match: names["\u00b2" if "\u00b2" in match.group(0) else "\u00b3"], text, flags=re.I)
     simple_units = (
-        (r"\bmL\b", "mililita"), (r"\bkm\b", "kilometa"),
+        (r"\bmL\b", "mililita"), (r"\bkm\b", "kilomita"),
+        (r"\bhm\b", "hektomita"),
         (r"\bsm\b", "sentimeta"), (r"\bmm\b", "milimeta"),
         (r"\bkg\b", "kilogramu"), (r"\bhg\b", "hektogramu"),
         (r"\bg\b", "gramu"), (r"\bL\b", "lita"),
         (r"\bsh\b", "shilingi"), (r"\bst\b", "senti"),
-        (r"\bm\b", "meta"),
+        (r"\bm\b", "mita"),
     )
     for pattern, replacement in simple_units:
         text = re.sub(pattern, replacement, text, flags=re.I)
@@ -177,6 +178,7 @@ async def main():
     parser.add_argument("--page-to", type=int)
     parser.add_argument("--numbers-only", action="store_true")
     parser.add_argument("--adjacent-numbers-only", action="store_true")
+    parser.add_argument("--length-units-only", action="store_true")
     parser.add_argument("--cache-version")
     parser.add_argument("--version-only", action="store_true")
     parser.add_argument("--cleanup-temp", action="store_true")
@@ -220,6 +222,11 @@ async def main():
         mappings = {key: name for key, name in mappings.items()
                     if re.search(r"(?:[A-Za-z]\d|\d[A-Za-z]|\[\[blank:item-\d+\]\])",
                                  str(texts.get(key, "")))}
+    if args.length_units_only:
+        mappings = {
+            key: name for key, name in mappings.items()
+            if re.search(r"\b(?:km|hm|m)\b", str(texts.get(key, "")), flags=re.I)
+        }
     if args.version_only:
         if not args.cache_version:
             raise SystemExit("--version-only requires --cache-version")
