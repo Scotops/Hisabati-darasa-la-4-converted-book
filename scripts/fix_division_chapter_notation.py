@@ -181,7 +181,39 @@ def replace_page46_work():
         "Kwa hiyo, 561672&#xf7;696=807.",
         "Kwa hiyo, 561672 &#xf7; 696 = 807.",
     )
-    if 'data-long-division-work-source="pg046_n0012"' in page:
+    visual = (
+        '<div aria-hidden="true" class="chapter-long-division-work">'
+        '<div class="chapter-long-division-work__quotient" data-math-value="807"></div>'
+        '<div class="chapter-long-division-work__divisor" data-math-value="696)"></div>'
+        '<div class="chapter-long-division-work__dividend" data-math-value="561672"></div>'
+        '<div class="chapter-long-division-work__step chapter-long-division-work__line" data-math-value="−5568"></div>'
+        '<div class="chapter-long-division-work__step" data-math-value="487"></div>'
+        '<div class="chapter-long-division-work__step chapter-long-division-work__line" data-math-value="−000"></div>'
+        '<div class="chapter-long-division-work__step" data-math-value="4872"></div>'
+        '<div class="chapter-long-division-work__step chapter-long-division-work__line" data-math-value="−4872"></div>'
+        '<div class="chapter-long-division-work__step" data-math-value="0"></div>'
+        '</div>'
+    )
+    marker = 'data-long-division-work-source="pg046_n0012"'
+    marker_at = page.find(marker)
+    if marker_at >= 0:
+        start = page.rfind("<div", 0, marker_at)
+        token_pattern = re.compile(r'<div\b[^>]*>|</div>', re.I | re.S)
+        depth = 0
+        end = None
+        for token in token_pattern.finditer(page, start):
+            depth += -1 if token.group(0).startswith("</") else 1
+            if depth == 0:
+                end = token.end()
+                break
+        if end is None:
+            raise RuntimeError("Could not close existing pg046_n0012 work")
+        replacement = (
+            '<div data-long-division-work-source="pg046_n0012">'
+            '<span class="sr-only" data-id="pg046_n0012"></span>'
+            f'{visual}</div>'
+        )
+        page = page[:start] + replacement + page[end:]
         path.write_text(page, encoding="utf-8")
         return
     pattern = re.compile(
@@ -192,19 +224,6 @@ def replace_page46_work():
     if not match:
         raise RuntimeError("Could not find pg046_n0012 long-division work")
     attrs = re.sub(r'\s*data-id="pg046_n0012"', '', match.group("attrs"), count=1)
-    visual = (
-        '<div aria-hidden="true" class="chapter-long-division-work">'
-        '<div class="chapter-long-division-work__quotient">807</div>'
-        '<div class="chapter-long-division-work__divisor">696)</div>'
-        '<div class="chapter-long-division-work__dividend">561672</div>'
-        '<div class="chapter-long-division-work__step chapter-long-division-work__line">−5568</div>'
-        '<div class="chapter-long-division-work__step">487</div>'
-        '<div class="chapter-long-division-work__step chapter-long-division-work__line">−000</div>'
-        '<div class="chapter-long-division-work__step">4872</div>'
-        '<div class="chapter-long-division-work__step chapter-long-division-work__line">−4872</div>'
-        '<div class="chapter-long-division-work__step">0</div>'
-        '</div>'
-    )
     replacement = (
         f'<div{attrs} data-long-division-work-source="pg046_n0012">'
         '<span class="sr-only" data-id="pg046_n0012"></span>'

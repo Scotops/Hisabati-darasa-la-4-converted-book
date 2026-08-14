@@ -235,3 +235,10 @@ input[data-answer-state="incorrect"], textarea[data-answer-state="incorrect"] {
 .chapter-long-division-work__line {
   border-bottom: 0.075em solid currentColor;
 }
+
+/* Keep read-aloud highlighters from wrapping the visible digits and
+   dismantling the two-column long-division grid. Narration remains on the
+   adjacent sr-only data-id element. */
+.chapter-long-division-work [data-math-value]::before {
+  content: attr(data-math-value);
+}
