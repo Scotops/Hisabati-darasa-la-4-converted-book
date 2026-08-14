@@ -1,6 +1,7 @@
 /* Small, runtime-independent safeguards for converted mathematics activities. */
 (() => {
   const pageAnswers = { ...(window.correctAnswers || {}) };
+  const answerAlternatives = { ...(window.answerAlternatives || {}) };
   const normalize = value => String(value ?? "")
     .normalize("NFKC")
     .trim()
@@ -273,7 +274,19 @@
       document.querySelectorAll("[data-activity-item]").forEach(field => {
         const expected = answers[field.dataset.activityItem];
         if (expected == null || !(field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement)) return;
-        const valid = String(expected).split("||").some(answer => normalize(answer) === normalize(field.value));
+        const alternatives = [
+          ...String(expected).split("||"),
+          ...(answerAlternatives[field.dataset.activityItem] || []).map(String)
+        ];
+        const entered = field.value;
+        const valid = alternatives.some(answer => normalize(answer) === normalize(entered));
+        /* The bundled activity engine accepts one canonical answer. When a
+           reviewed equivalent is entered, submit the canonical form to that
+           engine and immediately restore exactly what the student typed. */
+        if (valid && normalize(entered) !== normalize(expected)) {
+          field.value = String(expected).split("||")[0];
+          setTimeout(() => { field.value = entered; }, 0);
+        }
         field.dataset.answerState = valid ? "correct" : "incorrect";
         field.setAttribute("aria-invalid", valid ? "false" : "true");
       });
