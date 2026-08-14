@@ -169,3 +169,27 @@ input[data-answer-state="incorrect"], textarea[data-answer-state="incorrect"] {
     max-width: 100%;
   }
 }
+.chapter-long-division {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  align-items: start;
+  font-family: "Courier New", monospace;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+.chapter-long-division__divisor {
+  padding: .16em .08em 0 0;
+}
+.chapter-long-division__divisor::after {
+  content: ")";
+}
+.chapter-long-division__dividend {
+  border-top: .1em solid currentColor;
+  padding: .08em .2em 0 .08em;
+}
+.chapter-long-division-question {
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+}
