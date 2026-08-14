@@ -243,3 +243,53 @@ input[data-answer-state="incorrect"], textarea[data-answer-state="incorrect"] {
 .chapter-long-division-work [data-math-value]::before {
   content: attr(data-math-value);
 }
+
+/* Fixed metric columns for length calculations. Each visible row uses the
+   same equal-width grid, while the original data-id remains on an sr-only
+   narration node. This prevents read-aloud highlighting or proportional
+   spaces from moving a numeral into the wrong unit column. */
+.metric-inline-wrap {
+  display: block;
+  width: min(100%, var(--metric-width, 13.5rem));
+  margin-inline: auto;
+  letter-spacing: normal !important;
+}
+
+.metric-inline-wrap--left {
+  margin-inline: 0;
+}
+
+.metric-inline-row {
+  display: grid;
+  grid-template-columns: repeat(var(--metric-cols), minmax(0, 1fr));
+  width: 100%;
+  align-items: baseline;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: normal !important;
+  white-space: nowrap;
+}
+
+.metric-inline-cell {
+  min-width: 0;
+  text-align: center;
+}
+
+.metric-inline-wrap--double-rule {
+  border-bottom: 2px solid #374151;
+  padding-bottom: .22rem;
+  margin-bottom: 1.15rem;
+  position: relative;
+}
+
+.metric-inline-wrap--double-rule::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: -.9rem;
+  border-bottom: 2px solid #4b5563;
+}
+
+.metric-inline-wrap--rule {
+  border-bottom: 2px solid #374151;
+  padding-bottom: .2rem;
+}
