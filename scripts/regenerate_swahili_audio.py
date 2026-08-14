@@ -12,6 +12,26 @@ import edge_tts
 
 VOICE = "sw-TZ-RehemaNeural"
 
+SPEECH_OVERRIDES = {
+    "pg017_n0002": "Namba za Kirumi, hamsini ya Kirumi hadi mia moja ya Kirumi",
+    "pg017_tbl1_r2_c2": "hamsini ya Kirumi",
+    "pg017_tbl1_r2_c3": "sitini ya Kirumi",
+    "pg017_tbl1_r2_c4": "sabini ya Kirumi",
+    "pg017_tbl1_r2_c5": "themanini ya Kirumi",
+    "pg017_tbl1_r2_c6": "tisini ya Kirumi",
+    "pg017_tbl1_r2_c7": "mia moja ya Kirumi",
+    "pg017_tbl2_r1_c1": "hamsini na tano ya Kirumi",
+    "pg017_tbl2_r2_c1": "hamsini na tisa ya Kirumi",
+    "pg017_tbl2_r3_c1": "themanini na tisa ya Kirumi",
+    "pg017_tbl2_r4_c1": "sabini na mbili ya Kirumi",
+    "pg017_tbl2_r5_c1": "tisini na tisa ya Kirumi",
+    "pg017_tbl2_r6_c1": "sitini na nne ya Kirumi",
+    "pg017_tbl2_r7_c1": "hamsini na nane ya Kirumi",
+    "pg017_tbl2_r8_c1": "sitini na moja ya Kirumi",
+    "pg017_tbl2_r9_c1": "sabini na tatu ya Kirumi",
+    "pg017_tbl2_r10_c1": "themanini na tano ya Kirumi",
+}
+
 
 def physical_audio_name(mapped_name):
     return mapped_name.split("?", 1)[0]
@@ -133,7 +153,7 @@ def spoken_text(value):
 async def generate_one(key, text, output, semaphore):
     if output.exists() and output.stat().st_size > 500:
         return True, key, None
-    speech = spoken_text(text)
+    speech = SPEECH_OVERRIDES.get(key, spoken_text(text))
     if not speech:
         return True, key, None
     async with semaphore:
