@@ -156,6 +156,66 @@ page47_exercise = [
 for text_id, number, divisor, dividend in page47_exercise:
     replace_display("pg047_sec001.html", text_id, divisor, dividend, number)
 
+
+def make_page47_interactive():
+    path = ROOT / "pg047_sec001.html"
+    page = path.read_text(encoding="utf-8").replace(
+        'data-section-type="boxed_text" data-section-id="pg047_sec001"',
+        'data-section-type="activity_fill_in_the_blank" data-section-id="pg047_sec001"',
+    )
+    answers = {
+        10: "14", 11: "12", 12: "900", 13: "103", 14: "1814", 15: "121",
+        16: "33", 17: "523", 18: "48", 19: "165", 20: "631", 21: "35",
+        22: "386", 23: "2919", 24: "23", 25: "63", 26: "11", 27: "38",
+    }
+    for offset, (text_id, number, _, _) in enumerate(page47_exercise):
+        pattern = re.compile(
+            rf'<(?P<tag>p|label)\b(?P<attrs>[^>]*data-long-division-source="{text_id}"[^>]*)>'
+            rf'(?P<body>.*?)</(?P=tag)>',
+            re.I | re.S,
+        )
+        match = pattern.search(page)
+        if not match:
+            raise RuntimeError(f"Could not make {text_id} interactive")
+        attrs = re.sub(
+            r'class="[^"]*"',
+            'class="flex min-w-0 flex-col items-start gap-3 text-lg leading-tight sm:text-2xl md:text-3xl"',
+            match.group("attrs"),
+            count=1,
+        )
+        answer_input = (
+            f'<input type="text" class="h-12 w-full max-w-[13rem] rounded-lg border-2 '
+            'border-gray-400 bg-white px-3 text-xl focus:border-cyan-600 focus:outline-none" '
+            f'data-aria-id="aria-1-0-{offset}" data-activity-item="item-{number}" '
+            f'aria-label="Jibu la swali la {number}" tabindex="0">'
+        )
+        replacement = f'<label{attrs}>{match.group("body")}{answer_input}</label>'
+        page = page[:match.start()] + replacement + page[match.end():]
+
+    answer_json = "{" + ",".join(
+        f'\"item-{number}\":\"{answer}\"' for number, answer in answers.items()
+    ) + "}"
+    script = (
+        '    <script type="text/javascript">\n'
+        f"        window.correctAnswers = JSON.parse('{answer_json}');\n"
+        '    </script>\n'
+    )
+    page = re.sub(
+        r'\s*<script type="text/javascript">\s*window\.correctAnswers\s*=.*?</script>\s*',
+        "\n" + script,
+        page,
+        flags=re.I | re.S,
+    )
+    if "window.correctAnswers" not in page:
+        page = page.replace(
+            '    <div class="relative z-50" id="interface-container"></div>',
+            script + '    <div class="relative z-50" id="interface-container"></div>',
+        )
+    path.write_text(page, encoding="utf-8")
+
+
+make_page47_interactive()
+
 page50_exercise = [
     ("pg050_n0019", "6", "467"),
     ("pg050_n0021", "1279", "255812"),
