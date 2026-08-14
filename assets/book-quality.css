@@ -293,3 +293,38 @@ input[data-answer-state="incorrect"], textarea[data-answer-state="incorrect"] {
   border-bottom: 2px solid #374151;
   padding-bottom: .2rem;
 }
+
+.metric-answer-slot {
+  display: block;
+  width: 100%;
+  height: 2.75rem;
+  margin-top: .15rem;
+  border-bottom: 2px solid #6b7280;
+  transition: border-color .15s ease;
+}
+
+.metric-answer-slot:focus-within {
+  border-bottom-color: #0891b2;
+}
+
+.metric-answer-input {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0 !important;
+  padding: .1rem .35rem !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  text-align: center;
+}
+
+.metric-answer-slot:has(.border-green-500) {
+  border-bottom-color: #22c55e;
+}
+
+.metric-answer-slot:has(.border-red-500) {
+  border-bottom-color: #ef4444;
+}
