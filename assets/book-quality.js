@@ -57,15 +57,74 @@
         }
       });
     };
+    const renderPlaceValueColumns = () => {
+      const unitPattern = /^(?:km|hm|dam|m|dm|sm|mm|tani|t|kg|hg|dag|g|dg|sg|mg|l|ml|saa|dakika|sh|st)$/i;
+      const parents = new Set([...document.querySelectorAll("#content .whitespace-pre")].map(node => node.parentElement));
+      parents.forEach(parent => {
+        if (!parent) return;
+        const rows = [...parent.children].filter(node => node.classList?.contains("whitespace-pre"));
+        const header = rows.find(node => {
+          const parts = (node.dataset.placeValueSource || node.textContent).trim().split(/\s+/).filter(Boolean);
+          return parts.length >= 2 && parts.length <= 4 && parts.every(part => unitPattern.test(part));
+        });
+        if (!header) return;
+        const columnCount = (header.dataset.placeValueSource || header.textContent).trim().split(/\s+/).filter(Boolean).length;
+        const preparedRows = rows.map(node => {
+          if (!node.dataset.placeValueSource) node.dataset.placeValueSource = node.textContent.replace(/\u00a0/g, " ").trim();
+          const source = node.dataset.placeValueSource;
+          if (!source) return null;
+          let parts = source.split(/\s+/).filter(Boolean);
+          if (parts.length === columnCount + 1 && /^[+\-\u2212\u00d7x]$/i.test(parts[0])) {
+            parts = [`${parts[0]} ${parts[1]}`, ...parts.slice(2)];
+          }
+          if (parts.length > columnCount) return null;
+          parts = [...Array(columnCount - parts.length).fill(""), ...parts];
+          return { node, source, parts };
+        }).filter(Boolean);
+        const columnWidths = Array.from({ length: columnCount }, (_, index) =>
+          Math.max(3, ...preparedRows.map(row => row.parts[index].length))
+        );
+        const columnTemplate = columnWidths.map(width => `${width + 1}ch`).join(" ");
+        preparedRows.forEach(({ node, source, parts }) => {
+          if (node.dataset.placeColumns === String(columnCount) && node.querySelectorAll(":scope > .validation-place-cell").length === columnCount) return;
+          node.dataset.placeColumns = String(columnCount);
+          node.classList.add("validation-place-value-row");
+          node.setAttribute("aria-label", source);
+          node.style.setProperty("font-family", '"Courier New", Courier, ui-monospace, monospace', "important");
+          node.style.setProperty("font-variant-numeric", "tabular-nums lining-nums");
+          node.style.setProperty("display", "grid", "important");
+          node.style.setProperty("grid-template-columns", columnTemplate, "important");
+          node.style.setProperty("justify-content", "center", "important");
+          node.style.setProperty("column-gap", "1.5ch", "important");
+          node.style.setProperty("padding-left", "0", "important");
+          node.style.setProperty("padding-right", "0", "important");
+          node.style.setProperty("margin-left", "0", "important");
+          node.style.setProperty("margin-right", "0", "important");
+          node.replaceChildren(...parts.map(part => {
+            const cell = document.createElement("span");
+            cell.className = "validation-place-cell";
+            cell.setAttribute("aria-hidden", "true");
+            cell.textContent = part;
+            return cell;
+          }));
+        });
+      });
+    };
     stabilizeSpacedCalculations();
+    renderPlaceValueColumns();
     setTimeout(stabilizeSpacedCalculations, 700);
     setTimeout(stabilizeSpacedCalculations, 1700);
+    setTimeout(renderPlaceValueColumns, 700);
+    setTimeout(renderPlaceValueColumns, 1700);
     const alignmentContent = document.getElementById("content");
     if (alignmentContent) {
       let spacingRepairTimer;
       new MutationObserver(() => {
         clearTimeout(spacingRepairTimer);
-        spacingRepairTimer = setTimeout(stabilizeSpacedCalculations, 80);
+        spacingRepairTimer = setTimeout(() => {
+          stabilizeSpacedCalculations();
+          renderPlaceValueColumns();
+        }, 80);
       }).observe(alignmentContent, { childList: true, subtree: true, characterData: true });
     }
     const alignmentPages = new Set(["pg033_sec001", "pg034_sec001", "pg035_sec001", "pg039_sec001", "pg045_sec001", "pg046_sec001", "pg057_sec001", "pg058_sec002", "pg060_sec001", "pg061_sec001", "pg062_sec001", "pg063_sec001", "pg069_sec001", "pg070_sec001", "pg071_sec001", "pg072_sec001", "pg074_sec001", "pg077_sec001", "pg079_sec001", "pg082_sec001", "pg121_sec002", "pg123_sec001", "pg154_sec001", "pg155_sec001", "pg156_sec001", "pg157_sec001", "pg157_sec002", "pg159_sec001", "pg160_sec002", "pg161_sec001", "pg162_sec001", "pg170_sec001", "pg170_sec002", "pg171_sec001", "pg179_sec002", "pg180_sec002", "pg183_sec002"]);

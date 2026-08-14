@@ -351,6 +351,16 @@ input[data-answer-state="incorrect"], textarea[data-answer-state="incorrect"] {
   white-space: pre !important;
 }
 
+#content .validation-place-value-row > .validation-place-cell {
+  min-width: 0;
+  text-align: right;
+  white-space: nowrap;
+}
+
+#content .validation-place-value-row:first-child > .validation-place-cell {
+  text-align: center;
+}
+
 /* The converted mathematical structures should use lining, equal-width
    numerals even when they are already represented by grids or tables. */
 #content .validation-html-math-table,
