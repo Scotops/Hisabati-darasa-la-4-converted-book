@@ -30,6 +30,13 @@ SPEECH_OVERRIDES = {
     "pg017_tbl2_r8_c1": "sitini na moja ya Kirumi",
     "pg017_tbl2_r9_c1": "sabini na tatu ya Kirumi",
     "pg017_tbl2_r10_c1": "themanini na tano ya Kirumi",
+    "pg066_n0010": "miligramu, em ge",
+    "pg066_n0012": "sentigramu, es ge",
+    "pg066_n0014": "desigramu, de ge",
+    "pg066_n0016": "gramu, ge",
+    "pg066_n0018": "dekagramu, de a ge",
+    "pg066_n0020": "hektogramu, ha ge",
+    "pg066_n0022": "kilogramu, ka ge",
 }
 
 
