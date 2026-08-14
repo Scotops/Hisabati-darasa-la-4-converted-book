@@ -8,8 +8,8 @@ ROOT = Path(__file__).resolve().parents[1]
 def component(divisor, dividend):
     return (
         '<span aria-hidden="true" class="chapter-long-division">'
-        f'<span class="chapter-long-division__divisor">{divisor}</span>'
-        f'<span class="chapter-long-division__dividend">{dividend}</span>'
+        f'<span class="chapter-long-division__divisor" data-math-value="{divisor}"></span>'
+        f'<span class="chapter-long-division__dividend" data-math-value="{dividend}"></span>'
         '</span>'
     )
 
