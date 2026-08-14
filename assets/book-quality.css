@@ -363,6 +363,20 @@ input[data-answer-state="incorrect"], textarea[data-answer-state="incorrect"] {
 
 /* The converted mathematical structures should use lining, equal-width
    numerals even when they are already represented by grids or tables. */
+#content {
+  /* Apply the same digit advance to every numeral in the reader, including
+     ordinary prose and exercise labels that are not wrapped in a generated
+     calculation component.  This closes the final gap found by the complete
+     page-by-page audit: isolated rows could otherwise fall back to the
+     proportional figures of their surrounding font. */
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+#content math,
+#content [data-id] {
+  font-variant-numeric: inherit;
+}
+
 #content .validation-html-math-table,
 #content .validation-vertical-calculation,
 #content .metric-inline-row,
