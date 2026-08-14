@@ -63,6 +63,7 @@ def replace_display(filename, text_id, divisor, dividend, question_number=None):
         attrs = re.sub(r'\s*data-id="[^"]+"', '', attrs, count=1)
         source_text = re.sub(r'<[^>]+>', ' ', match.group('body'))
         source_text = re.sub(r'\s+', ' ', source_text).strip()
+    attrs = attrs.replace(" underline underline-offset-4", "")
     prefix = f'<span aria-hidden="true">{question_number}.</span>' if question_number else ''
     visible = component(divisor, dividend)
     wrapper_class = 'chapter-long-division-question' if question_number else ''
@@ -97,6 +98,22 @@ worked = [
 for args in worked:
     replace_display(*args)
 
+# The final exercise group on page 44 is printed in long-division notation in
+# the source book. Keep each original narration ID and the adjacent input.
+page44_exercise = [
+    ("pg044_n0061", "2", "64"),
+    ("pg044_n0064", "3", "93"),
+    ("pg044_n0067", "9", "999"),
+    ("pg044_n0070", "8", "168"),
+    ("pg044_n0073", "20", "400"),
+    ("pg044_n0076", "7", "217"),
+    ("pg044_n0079", "12", "264"),
+    ("pg044_n0082", "31", "961"),
+    ("pg044_n0085", "75", "825"),
+]
+for text_id, divisor, dividend in page44_exercise:
+    replace_display("pg044_sec002.html", text_id, divisor, dividend)
+
 # These exercise items were already written as divisor)dividend in the source,
 # but lacked the top bar. Preserve their narration IDs while rendering the
 # complete long-division symbol consistently.
@@ -113,11 +130,14 @@ exercise = [
 for text_id, number, divisor, dividend in exercise:
     replace_display("pg051_sec001.html", text_id, divisor, dividend, number)
 
-for filename in sorted({row[0] for row in worked} | {"pg051_sec001.html"}):
+for filename in sorted({row[0] for row in worked} | {"pg044_sec002.html", "pg051_sec001.html"}):
     path = ROOT / filename
     page = path.read_text(encoding="utf-8").replace(
         "./assets/book-quality.css?v=10", "./assets/book-quality.css?v=11"
     )
     path.write_text(page, encoding="utf-8")
 
-print(f"Standardized {len(worked) + len(exercise)} long-division displays across the division chapter.")
+print(
+    f"Standardized {len(worked) + len(page44_exercise) + len(exercise)} "
+    "long-division displays across the division chapter."
+)
