@@ -173,7 +173,7 @@ input[data-answer-state="incorrect"], textarea[data-answer-state="incorrect"] {
   display: inline-grid;
   grid-template-columns: auto auto;
   align-items: start;
-  font-family: "Courier New", monospace;
+  font-family: Arial, Helvetica, sans-serif;
   font-variant-numeric: tabular-nums;
   line-height: 1.1;
   white-space: nowrap;
@@ -192,4 +192,46 @@ input[data-answer-state="incorrect"], textarea[data-answer-state="incorrect"] {
   display: inline-flex;
   align-items: center;
   gap: .65rem;
+}
+
+.chapter-long-division-work {
+  display: inline-grid;
+  grid-template-columns: max-content minmax(6ch, max-content);
+  align-items: end;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  line-height: 1.18;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.chapter-long-division-work__quotient {
+  grid-column: 2;
+  padding-right: 0.15ch;
+  text-align: right;
+}
+
+.chapter-long-division-work__divisor {
+  grid-column: 1;
+  padding-right: 0.08ch;
+  text-align: right;
+}
+
+.chapter-long-division-work__dividend {
+  grid-column: 2;
+  border-top: 0.1em solid currentColor;
+  padding: 0.12em 0.15ch 0 0.18ch;
+  text-align: right;
+}
+
+.chapter-long-division-work__step {
+  grid-column: 2;
+  justify-self: end;
+  min-width: 4ch;
+  padding-right: 0.15ch;
+  text-align: right;
+}
+
+.chapter-long-division-work__line {
+  border-bottom: 0.075em solid currentColor;
 }
