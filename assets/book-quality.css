@@ -321,6 +321,17 @@ input[data-answer-state="incorrect"], textarea[data-answer-state="incorrect"] {
   text-align: center;
 }
 
+.metric-answer-slot--exercise {
+  width: 72%;
+  margin-top: 2.5rem;
+}
+
+@media (max-width: 639px) {
+  .metric-answer-slot--exercise {
+    width: 68%;
+  }
+}
+
 .metric-answer-slot:has(.border-green-500) {
   border-bottom-color: #22c55e;
 }

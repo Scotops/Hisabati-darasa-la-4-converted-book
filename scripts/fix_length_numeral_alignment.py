@@ -149,6 +149,41 @@ def place_page60_answers_on_lines():
 place_page60_answers_on_lines()
 
 
+def place_page63_answers_on_lines():
+    path = ROOT / "pg063_sec002.html"
+    page = path.read_text(encoding="utf-8")
+    pattern = re.compile(
+        r'<div class="mt-10 border-t-\[3px\] border-gray-500 w-\[72%\] max-sm:w-\[68%\]"></div>'
+        r'<input class="(?P<classes>[^"]*)"(?P<attrs>[^>]*)>',
+        re.I | re.S,
+    )
+
+    def replacement(match):
+        classes = " ".join(
+            name for name in match.group("classes").split()
+            if name not in {
+                "mt-2", "w-[72%]", "max-sm:w-[68%]", "bg-transparent",
+                "border-0", "outline-none", "text-center", "p-0", "block",
+            }
+        )
+        return (
+            '<label class="metric-answer-slot metric-answer-slot--exercise">'
+            f'<input class="metric-answer-input {classes}"{match.group("attrs")}>'
+            '</label>'
+        )
+
+    page, count = pattern.subn(replacement, page)
+    if count not in (0, 9):
+        raise RuntimeError(f"Expected 9 page 63 answer slots, changed {count}")
+    page = page.replace(
+        "./assets/book-quality.css?v=10", "./assets/book-quality.css?v=14"
+    )
+    path.write_text(page, encoding="utf-8")
+
+
+place_page63_answers_on_lines()
+
+
 for filename in ("pg059_sec001.html", "pg060_sec001.html", "pg060_sec002.html"):
     path = ROOT / filename
     page = path.read_text(encoding="utf-8").replace(
