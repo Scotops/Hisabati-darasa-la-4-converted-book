@@ -50,6 +50,8 @@ SPEECH_OVERRIDES = {
     "pg078_n0015": "Hatua.",
     "pg078_n0016": "Hatua ya kwanza. Toa mililita. Mililita mia tatu na sabini, kutoa mililita mia moja na sitini, ni sawa na mililita mia mbili na kumi. Andika mia mbili na kumi katika safu ya mililita.",
     "pg078_n0017": "Hatua ya pili. Toa lita. Lita themanini, kutoa lita arobaini na tano, ni sawa na lita thelathini na tano. Andika thelathini na tano katika safu ya lita.",
+    "pg107_n0011": "Eneo la pembetatu ni sawa na moja ya mbili mara kitako mara kimo.",
+    "pg107_n0012": "Ni sawa na moja ya mbili mara mita thelathini mara mita kumi na tano.",
 }
 
 
