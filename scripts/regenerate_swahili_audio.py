@@ -115,18 +115,6 @@ def roman_spoken(token):
 
 def spoken_text(value):
     text = html.unescape(str(value))
-    text = re.sub(
-        r"<mfrac[^>]*>\s*<mn[^>]*>1</mn>\s*<mn[^>]*>2</mn>\s*</mfrac>",
-        " nusu ",
-        text,
-        flags=re.I | re.S,
-    )
-    text = re.sub(
-        r"<mfrac[^>]*>\s*<mn[^>]*>1</mn>\s*<mn[^>]*>(\d+)</mn>\s*</mfrac>",
-        r" moja ya \1 ",
-        text,
-        flags=re.I | re.S,
-    )
     # Preserve the mathematical meaning of MathML square-unit notation before
     # tags are stripped. Otherwise m² is flattened to "m 2" and spoken wrongly.
     mathml_square_units = (
@@ -138,7 +126,7 @@ def spoken_text(value):
         text = re.sub(pattern, replacement, text, flags=re.I | re.S)
     fraction = re.compile(r"<mfrac[^>]*>\s*<[^>]+>(.*?)</[^>]+>\s*<[^>]+>(.*?)</[^>]+>\s*</mfrac>", re.I | re.S)
     while fraction.search(text):
-        text = fraction.sub(r" \1 juu ya \2 ", text)
+        text = fraction.sub(r" \1 chini ya \2 ", text)
     text = re.sub(r"<[^>]+>", " ", text)
     # Expand mathematical and measurement abbreviations before converting digits.
     # Longer units must be replaced first so that, for example, m\u00b2 is not read as m.
@@ -204,6 +192,7 @@ async def main():
     parser.add_argument("--numbers-only", action="store_true")
     parser.add_argument("--adjacent-numbers-only", action="store_true")
     parser.add_argument("--length-units-only", action="store_true")
+    parser.add_argument("--fractions-only", action="store_true")
     parser.add_argument("--cache-version")
     parser.add_argument("--version-only", action="store_true")
     parser.add_argument("--cleanup-temp", action="store_true")
@@ -251,6 +240,11 @@ async def main():
         mappings = {
             key: name for key, name in mappings.items()
             if re.search(r"\b(?:km|hm|m)\b", str(texts.get(key, "")), flags=re.I)
+        }
+    if args.fractions_only:
+        mappings = {
+            key: name for key, name in mappings.items()
+            if "<mfrac" in str(texts.get(key, ""))
         }
     if args.version_only:
         if not args.cache_version:
