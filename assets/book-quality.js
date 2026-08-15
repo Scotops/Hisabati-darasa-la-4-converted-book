@@ -56,7 +56,7 @@
       const fallback = shapeAltOverrides[textId] || image.getAttribute("alt") || "";
       image.setAttribute("alt", fallback);
       const narration = document.createElement("span");
-      narration.className = "sr-only diagram-narration";
+      narration.className = "adt-audio-description diagram-narration";
       narration.dataset.id = textId;
       narration.textContent = fallback;
       image.removeAttribute("data-id");
