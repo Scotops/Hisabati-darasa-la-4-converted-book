@@ -392,3 +392,34 @@ input[data-answer-state="incorrect"], textarea[data-answer-state="incorrect"] {
 #content .grid-cols-\[2rem_1fr_1fr\] {
   grid-template-columns: 2rem minmax(0, 1fr) minmax(0, 1fr);
 }
+
+/* Capacity examples use explicit operator, litre and millilitre columns so
+   every place value remains vertically aligned with its unit heading. */
+#content .metric-example-calculation {
+  display: grid;
+  grid-template-columns: 2rem 4rem 5rem;
+  width: max-content;
+  align-items: baseline;
+  text-align: right;
+  font-size: 1.125rem;
+  line-height: 1.35;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+#content .metric-example-calculation > div:nth-of-type(3n + 2),
+#content .metric-example-calculation > div:nth-of-type(3n + 3) {
+  padding-inline: 0.35rem;
+}
+
+#content .metric-example-calculation .metric-example-rule {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin-block: 0.2rem;
+  border-top: 1px solid #64748b;
+}
+
+@media (min-width: 640px) {
+  #content .metric-example-layout {
+    grid-template-columns: 220px minmax(0, 1fr);
+  }
+}
