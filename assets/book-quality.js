@@ -244,6 +244,20 @@
           const fractionMarkup = parts => `<span class="validation-fraction"><span>${parts[0]}</span><span>${parts[1]}</span></span>`;
           const operator = expression.match(/\+|\-|\u00d7|\u00f7|\u2212|x/i)?.[0] || "\u00d7";
           visual.innerHTML = `<span>${fractionMarkup(fractionPairs[0])}</span><span>${operator} ${fractionMarkup(fractionPairs[1])}</span><span class="validation-rule"></span>`;
+        } else if (pageId === "pg079_sec001") {
+          const parseCapacity = value => value.trim().match(/^(\d+)\s*L\s*(\d+)\s*mL$/i);
+          const upper = parseCapacity(match[1]);
+          const lower = parseCapacity(match[3]);
+          if (upper && lower) {
+            visual.classList.add("validation-capacity-calculation");
+            visual.innerHTML = `
+              <span class="validation-capacity-row validation-capacity-heading"><span></span><span>L</span><span>mL</span></span>
+              <span class="validation-capacity-row"><span></span><span>${upper[1]}</span><span>${upper[2]}</span></span>
+              <span class="validation-capacity-row"><span>${match[2]}</span><span>${lower[1]}</span><span>${lower[2]}</span></span>
+              <span class="validation-rule"></span>`;
+          } else {
+            visual.innerHTML = `<span>${match[1]}</span><span>${match[2]} ${match[3]}</span><span class="validation-rule"></span>`;
+          }
         } else {
           visual.innerHTML = `<span>${match[1]}</span><span>${match[2]} ${match[3]}</span><span class="validation-rule"></span>`;
         }

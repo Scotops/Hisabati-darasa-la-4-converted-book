@@ -83,6 +83,32 @@ math mtd { text-align: right; }
   border-top: 2px solid currentColor;
 }
 
+/* Capacity exercises are place-value calculations, not inline unit strings.
+   Keep the operator, litre values and millilitre values in three fixed columns
+   so every numeral is directly below its unit heading. */
+.validation-vertical-calculation.validation-capacity-calculation {
+  width: 11rem;
+  min-width: 11rem;
+  justify-items: stretch;
+}
+
+.validation-capacity-row {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr) minmax(0, 1fr);
+  width: 100%;
+  column-gap: .75rem;
+}
+
+.validation-capacity-row > span {
+  min-width: 0;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.validation-capacity-heading > span:not(:first-child) {
+  text-align: center;
+}
+
 .validation-fraction {
   display: inline-grid;
   grid-template-rows: auto auto;
