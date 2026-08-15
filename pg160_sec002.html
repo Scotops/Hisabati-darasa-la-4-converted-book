@@ -16,6 +16,16 @@
 
     <style>
       body, p, h1, h2, h3, h4, h5, h6, span, div, button, input, textarea, select { font-family: 'Atkinson Hyperlegible','Merriweather',sans-serif; }
+      .time-stack { border-collapse: collapse; margin-inline: auto; table-layout: fixed; width: 12rem; }
+      .time-stack th, .time-stack td { padding: .12rem .45rem; text-align: right; width: 50%; }
+      .time-stack th { font-weight: 400; text-align: center; }
+      .time-stack .operation-row td { border-bottom: 2px solid #1f2937; }
+      .time-stack .answer-row td { border-bottom: 2px solid #1f2937; padding-top: .3rem; }
+      .time-stack .blank-answer td { height: 1.65rem; }
+      @media (max-width: 640px) {
+        .time-stack { width: 8rem; }
+        .time-stack th, .time-stack td { padding-inline: .25rem; }
+      }
     </style>    <link href="./assets/book-quality.css?v=13" rel="stylesheet">
 </head>
 
@@ -43,11 +53,19 @@
         </div>
 
         <div class="px-8 pt-2 pb-4 max-sm:px-4">
-          <div class="w-[220px] text-center max-sm:w-[140px]">
-            <p class="text-[24px] leading-tight text-gray-800 whitespace-pre max-lg:text-[22px] max-sm:text-[16px]" data-id="pg160_n0039">saa dakika</p>
-            <p class="text-[24px] leading-tight text-gray-800 whitespace-pre max-lg:text-[22px] max-sm:text-[16px]" data-id="pg160_n0040">3 15</p>
-            <p class="text-[24px] leading-tight text-gray-800 whitespace-pre max-lg:text-[22px] max-sm:text-[16px]" data-id="pg160_n0041">&#x2212; 1 45</p>
+          <div class="sr-only">
+            <p data-id="pg160_n0039">saa dakika</p>
+            <p data-id="pg160_n0040">3 15</p>
+            <p data-id="pg160_n0041">&#x2212; 1 45</p>
           </div>
+          <table class="time-stack text-[24px] leading-tight text-gray-800 max-lg:text-[22px] max-sm:text-[16px]" aria-hidden="true">
+            <thead><tr><th>saa</th><th>dakika</th></tr></thead>
+            <tbody>
+              <tr><td>3</td><td>15</td></tr>
+              <tr class="operation-row"><td>&#x2212; 1</td><td>45</td></tr>
+              <tr class="answer-row blank-answer"><td></td><td></td></tr>
+            </tbody>
+          </table>
         </div>
 
         <div class="grid grid-cols-[1fr_240px] border-t border-cyan-300 max-sm:grid-cols-[1fr_130px]">
@@ -67,12 +85,20 @@
 
           <div class="p-5 max-sm:p-3">
             <h2 class="text-[29px] leading-tight font-bold text-gray-800 mb-2 max-lg:text-[26px] max-sm:text-[18px]" data-id="pg160_n0051">Njia</h2>
-            <div class="text-center max-sm:text-left">
-              <p class="text-[24px] leading-tight text-gray-800 whitespace-pre max-lg:text-[21px] max-sm:text-[14px]" data-id="pg160_n0052">saa dakika</p>
-              <p class="text-[24px] leading-tight text-gray-800 whitespace-pre max-lg:text-[21px] max-sm:text-[14px]" data-id="pg160_n0053">2 75</p>
-              <p class="text-[24px] leading-tight text-gray-800 whitespace-pre max-lg:text-[21px] max-sm:text-[14px]" data-id="pg160_n0054">&#x2212; 1 45</p>
-              <p class="text-[24px] leading-tight text-gray-800 whitespace-pre max-lg:text-[21px] max-sm:text-[14px]" data-id="pg160_n0055">1 30</p>
+            <div class="sr-only">
+              <p data-id="pg160_n0052">saa dakika</p>
+              <p data-id="pg160_n0053">2 75</p>
+              <p data-id="pg160_n0054">&#x2212; 1 45</p>
+              <p data-id="pg160_n0055">1 30</p>
             </div>
+            <table class="time-stack text-[24px] leading-tight text-gray-800 max-lg:text-[21px] max-sm:text-[14px]" aria-hidden="true">
+              <thead><tr><th>saa</th><th>dakika</th></tr></thead>
+              <tbody>
+                <tr><td>2</td><td>75</td></tr>
+                <tr class="operation-row"><td>&#x2212; 1</td><td>45</td></tr>
+                <tr class="answer-row"><td>1</td><td>30</td></tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
