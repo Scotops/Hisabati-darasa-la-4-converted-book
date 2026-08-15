@@ -43,6 +43,13 @@ SPEECH_OVERRIDES = {
     "pg078_ex_q4": "Swali la nne: lita nne, mililita mia saba na hamsini; lita mia tatu na kumi na sita, mililita mia mbili na hamsini; jumlisha lita kumi na tano, mililita mia moja na moja.",
     "pg078_ex_q5": "Swali la tano: lita kumi na saba, mililita mia nane; jumlisha lita tatu, mililita mia tatu na sitini na sita.",
     "pg078_ex_q6": "Swali la sita: lita ishirini, mililita mia tisa na ishirini; lita kumi na nne, mililita mia moja na kumi na mbili; jumlisha lita kumi na tatu, mililita mia moja na ishirini na sita.",
+    "pg078_n0011": "Lita themanini, mililita mia tatu na sabini, kutoa lita arobaini na tano, mililita mia moja na sitini, ni sawa na.",
+    "pg078_n0012": "Njia.",
+    "pg078_n0013": "Safu za lita na mililita. Lita themanini, mililita mia tatu na sabini; toa lita arobaini na tano, mililita mia moja na sitini; jibu la mililita ni mia mbili na kumi.",
+    "pg078_n0014": "Safu za lita na mililita. Lita themanini, mililita mia tatu na sabini; toa lita arobaini na tano, mililita mia moja na sitini; jibu ni lita thelathini na tano, mililita mia mbili na kumi.",
+    "pg078_n0015": "Hatua.",
+    "pg078_n0016": "Hatua ya kwanza. Toa mililita. Mililita mia tatu na sabini, kutoa mililita mia moja na sitini, ni sawa na mililita mia mbili na kumi. Andika mia mbili na kumi katika safu ya mililita.",
+    "pg078_n0017": "Hatua ya pili. Toa lita. Lita themanini, kutoa lita arobaini na tano, ni sawa na lita thelathini na tano. Andika thelathini na tano katika safu ya lita.",
 }
 
 
