@@ -52,6 +52,9 @@ SPEECH_OVERRIDES = {
     "pg078_n0017": "Hatua ya pili. Toa lita. Lita themanini, kutoa lita arobaini na tano, ni sawa na lita thelathini na tano. Andika thelathini na tano katika safu ya lita.",
     "pg107_n0011": "Eneo la pembetatu ni sawa na moja ya mbili mara kitako mara kimo.",
     "pg107_n0012": "Ni sawa na moja ya mbili mara mita thelathini mara mita kumi na tano.",
+    "pg108_n0002": "Ni sawa na sentimeta za mraba, ishirini na sita mara kumi na mbili, gawanya kwa mbili.",
+    "pg108_n0003": "Ni sawa na sentimeta za mraba, mia tatu na kumi na mbili gawanya kwa mbili, ni sawa na sentimeta za mraba mia moja na hamsini na sita.",
+    "pg108_n0004": "Kwa hiyo, eneo la pembetatu K L M ni sentimeta za mraba mia moja na hamsini na sita.",
 }
 
 
