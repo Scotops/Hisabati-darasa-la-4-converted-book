@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 450" role="img" aria-labelledby="title desc">
+  <title id="title">Pembetatu yenye vipimo vya pande</title>
+  <desc id="desc">Pembetatu yenye pande za sentimeta 6, sentimeta 7 na sentimeta 9.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#222"/>
+    </marker>
+  </defs>
+  <rect width="760" height="450" fill="#fff"/>
+  <g fill="none" stroke="#222" stroke-width="3">
+    <path d="M95 385 L376 55 L675 360 Z"/>
+    <line x1="82" y1="381" x2="364" y2="48" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <line x1="389" y1="48" x2="689" y2="351" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <line x1="96" y1="410" x2="675" y2="385" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="30" fill="#222">
+    <rect x="125" y="215" width="112" height="48" fill="#fff" stroke="none"/>
+    <text x="181" y="249" text-anchor="middle">sm 6</text>
+    <rect x="482" y="175" width="112" height="48" fill="#fff" stroke="none"/>
+    <text x="538" y="209" text-anchor="middle">sm 7</text>
+    <rect x="330" y="382" width="112" height="48" fill="#fff" stroke="none"/>
+    <text x="386" y="416" text-anchor="middle">sm 9</text>
+  </g>
+</svg>
