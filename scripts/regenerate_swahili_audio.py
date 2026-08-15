@@ -73,6 +73,8 @@ SPEECH_OVERRIDES = {
     "pg121_n0037": "Swali la kumi na sita. mbili chini ya kumi na moja mara nne chini ya tano ni sawa na",
     "pg121_n0038": "Swali la kumi na saba. tatu chini ya tano mara tano chini ya tisa ni sawa na",
     "pg121_n0039": "Swali la kumi na nane. tatu chini ya nne mara sita chini ya kumi ni sawa na",
+    "pg132_im005": "Fikiri. Maisha bila matumizi ya namba za desimali.",
+    "pg132_im006": "Mchoro una mstatili uliogawanywa katika sehemu kumi zilizo sawa. Kila sehemu ni moja chini ya kumi. Sehemu ya kwanza imewekewa kivuli; ni sawa na sifuri nukta moja.",
     "pg123_ex001": "sita mara tatu chini ya nne ni sawa na",
     "pg123_ex002": "mbili chini ya tatu mara tisa ni sawa na",
     "pg123_ex003": "tano chini ya sita mara thelathini ni sawa na",
