@@ -423,3 +423,17 @@ input[data-answer-state="incorrect"], textarea[data-answer-state="incorrect"] {
     grid-template-columns: 220px minmax(0, 1fr);
   }
 }
+
+/* Full-width rules for the litre/millilitre subtraction examples.  Centering
+   the rule under the generated place-value grid keeps both unit columns over
+   the line instead of leaving the millilitre column hanging past its end. */
+#content .capacity-example-rule {
+  width: 11rem;
+  margin-inline: auto;
+}
+
+@media (max-width: 639px) {
+  #content .capacity-example-rule {
+    width: 9rem;
+  }
+}
