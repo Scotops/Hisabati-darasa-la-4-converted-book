@@ -75,6 +75,7 @@ SPEECH_OVERRIDES = {
     "pg121_n0039": "Swali la kumi na nane. tatu chini ya nne mara sita chini ya kumi ni sawa na",
     "pg132_im005": "Fikiri. Maisha bila matumizi ya namba za desimali.",
     "pg132_im006": "Mchoro una mstatili uliogawanywa katika sehemu kumi zilizo sawa. Kila sehemu ni moja chini ya kumi. Sehemu ya kwanza imewekewa kivuli; ni sawa na sifuri nukta moja.",
+    "pg133_table001": "Jedwali la sehemu na desimali linasomwa kwa safu. Safu ya kwanza: sehemu moja chini ya kumi, desimali sifuri nukta moja. Safu ya pili: sehemu mbili chini ya kumi, desimali sifuri nukta mbili. Safu ya tatu: sehemu tatu chini ya kumi, desimali sifuri nukta tatu. Safu ya nne: sehemu nne chini ya kumi, desimali sifuri nukta nne. Safu ya tano: sehemu tano chini ya kumi, desimali sifuri nukta tano. Safu ya sita: sehemu sita chini ya kumi, desimali sifuri nukta sita. Safu ya saba: sehemu saba chini ya kumi, desimali sifuri nukta saba. Safu ya nane: sehemu nane chini ya kumi, desimali sifuri nukta nane. Safu ya tisa: sehemu tisa chini ya kumi, desimali sifuri nukta tisa.",
     "pg123_ex001": "sita mara tatu chini ya nne ni sawa na",
     "pg123_ex002": "mbili chini ya tatu mara tisa ni sawa na",
     "pg123_ex003": "tano chini ya sita mara thelathini ni sawa na",
