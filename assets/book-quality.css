@@ -385,3 +385,10 @@ input[data-answer-state="incorrect"], textarea[data-answer-state="incorrect"] {
 #content pre {
   font-variant-numeric: tabular-nums lining-nums;
 }
+
+/* pg078: Tailwind did not emit this arbitrary three-column template. Without
+   it, CSS Grid falls back to a single implicit column and the operator, litre
+   and millilitre values are stacked vertically instead of lining up by unit. */
+#content .grid-cols-\[2rem_1fr_1fr\] {
+  grid-template-columns: 2rem minmax(0, 1fr) minmax(0, 1fr);
+}
