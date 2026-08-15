@@ -13,6 +13,13 @@ import edge_tts
 VOICE = "sw-TZ-RehemaNeural"
 
 SPEECH_OVERRIDES = {
+    "pg141_n0002": "Swali la kumi. Mia mbili na hamsini nukta nane, jumlisha ishirini na mbili nukta nne, ni sawa na.",
+    "pg141_n0003": "Swali la kumi na moja. Mia tatu na ishirini na tano nukta nne, jumlisha themanini na sita nukta nane, ni sawa na.",
+    "pg141_n0004": "Swali la kumi na mbili. Hamsini na nane nukta sifuri, jumlisha mbili nukta sita, ni sawa na.",
+    "pg141_n0005": "Swali la kumi na tatu. Mia mbili na ishirini na nne nukta mbili, jumlisha nne nukta tano, ni sawa na.",
+    "pg141_n0006": "Swali la kumi na nne. Sabini na tisa nukta tatu, jumlisha arobaini na sita nukta moja, ni sawa na.",
+    "pg141_n0007": "Swali la kumi na tano. Mia moja na themanini na nane nukta tatu, jumlisha kumi na tano nukta tisa, ni sawa na.",
+    "pg141_n0008": "Swali la kumi na sita. Tisini na mbili nukta sita, jumlisha ishirini na tisa nukta nane, ni sawa na.",
     "pg134_im002_crop1_crop1": "Mchoro una gridi ya miraba mia moja iliyopangwa katika safu kumi na mistari kumi. Mraba wa kwanza umewekewa kivuli. Mraba huo ni sehemu moja chini ya mia moja ya umbo zima, sawa na desimali sifuri nukta sifuri moja.",
     "pg017_n0002": "Namba za Kirumi, hamsini ya Kirumi hadi mia moja ya Kirumi",
     "pg017_tbl1_r2_c2": "hamsini ya Kirumi",
