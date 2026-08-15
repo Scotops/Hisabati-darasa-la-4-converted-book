@@ -163,6 +163,37 @@
     }
     const alignmentPages = new Set(["pg033_sec001", "pg034_sec001", "pg035_sec001", "pg039_sec001", "pg045_sec001", "pg046_sec001", "pg057_sec001", "pg058_sec002", "pg060_sec001", "pg061_sec001", "pg062_sec001", "pg063_sec001", "pg069_sec001", "pg070_sec001", "pg071_sec001", "pg072_sec001", "pg074_sec001", "pg077_sec001", "pg079_sec001", "pg082_sec001", "pg121_sec002", "pg123_sec001", "pg154_sec001", "pg155_sec001", "pg156_sec001", "pg157_sec001", "pg157_sec002", "pg159_sec001", "pg160_sec002", "pg161_sec001", "pg162_sec001", "pg170_sec001", "pg170_sec002", "pg171_sec001", "pg179_sec002", "pg180_sec002", "pg183_sec002"]);
     if (alignmentPages.has(pageId)) document.documentElement.classList.add("validation-alignment-page");
+
+    /* pg171: keep the operator separate from the shilingi and senti columns. */
+    const renderMoneyColumns = () => {
+      if (pageId !== "pg171_sec001") return;
+      const groups = [
+        ["pg171_n0011", "pg171_n0012", "pg171_n0013"],
+        ["pg171_n0029", "pg171_n0030", "pg171_n0031", "pg171_n0032"],
+        ["pg171_n0042", "pg171_n0043", "pg171_n0044", "pg171_n0045"]
+      ];
+      groups.forEach(ids => ids.forEach((id, rowIndex) => {
+        const row = document.querySelector(`[data-id="${id}"]`);
+        if (!row || row.dataset.moneyAligned === "true") return;
+        const parts = row.textContent.trim().split(/\s+/).filter(Boolean);
+        let cells;
+        if (rowIndex === 0) cells = ["", parts[0] || "", parts[1] || ""];
+        else if (["×", "x"].includes(parts[0])) cells = ["×", "", parts[1] || ""];
+        else if (parts.length === 1) cells = ["", "", parts[0]];
+        else cells = ["", parts[0] || "", parts[1] || ""];
+        row.textContent = "";
+        row.classList.add("validation-money-row");
+        cells.forEach(value => {
+          const cell = document.createElement("span");
+          cell.textContent = value;
+          row.appendChild(cell);
+        });
+        row.dataset.moneyAligned = "true";
+      }));
+    };
+    renderMoneyColumns();
+    setTimeout(renderMoneyColumns, 700);
+    setTimeout(renderMoneyColumns, 1700);
     const renderConvertedMathTables = () => {
       document.querySelectorAll("math mtable").forEach(mathTable => {
         if (mathTable.dataset.htmlTableRendered === "true") return;

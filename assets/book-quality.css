@@ -214,6 +214,24 @@ math mtd { text-align: right; }
   font-variant-numeric: tabular-nums lining-nums;
 }
 
+/* Money calculations use three fixed places: operator, shilingi and senti. */
+#content .validation-money-row {
+  display: grid !important;
+  grid-template-columns: 1.5rem 3.8rem 3.8rem;
+  width: 9.1rem;
+  column-gap: .35rem;
+  align-items: baseline;
+  font-family: "Courier New", Courier, ui-monospace, monospace !important;
+  font-variant-numeric: tabular-nums lining-nums;
+  text-align: right;
+  white-space: normal !important;
+}
+
+#content .validation-money-row > span {
+  min-width: 0;
+  text-align: right;
+}
+
 /* Activity controls must remain visible and large enough to use. */
 section[data-section-type^="activity_"] input[data-activity-item].sr-only,
 section[data-section-type^="activity_"] textarea[data-activity-item].sr-only,
