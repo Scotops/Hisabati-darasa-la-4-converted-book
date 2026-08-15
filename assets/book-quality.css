@@ -232,6 +232,26 @@ math mtd { text-align: right; }
   text-align: right;
 }
 
+#content .validation-money-table {
+  table-layout: fixed;
+  width: 11rem;
+  font-family: "Courier New", Courier, ui-monospace, monospace !important;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+#content .validation-money-table td {
+  width: 4.25rem;
+  padding: .08rem .35rem;
+  text-align: right;
+  white-space: nowrap;
+}
+
+#content .validation-money-table td:first-child {
+  width: 1.5rem;
+  padding-left: 0;
+  padding-right: .15rem;
+}
+
 /* Activity controls must remain visible and large enough to use. */
 section[data-section-type^="activity_"] input[data-activity-item].sr-only,
 section[data-section-type^="activity_"] textarea[data-activity-item].sr-only,
