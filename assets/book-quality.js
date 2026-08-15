@@ -244,6 +244,23 @@
           const fractionMarkup = parts => `<span class="validation-fraction"><span>${parts[0]}</span><span>${parts[1]}</span></span>`;
           const operator = expression.match(/\+|\-|\u00d7|\u00f7|\u2212|x/i)?.[0] || "\u00d7";
           visual.innerHTML = `<span>${fractionMarkup(fractionPairs[0])}</span><span>${operator} ${fractionMarkup(fractionPairs[1])}</span><span class="validation-rule"></span>`;
+        } else if (pageId === "pg082_sec001") {
+          const leftTokens = match[1].trim().split(/\s+/);
+          const firstNumber = leftTokens.findIndex(token => /^\d/.test(token));
+          const units = firstNumber > 0 ? leftTokens.slice(0, firstNumber) : [];
+          const upper = firstNumber > 0 ? leftTokens.slice(firstNumber) : [];
+          const lower = match[3].trim().split(/\s+/);
+          if (units.length && upper.length === units.length && lower.length === units.length) {
+            const row = (lead, values, extraClass = "") =>
+              `<span class="validation-unit-row ${extraClass}"><span>${lead}</span>${values.map(value => `<span>${value}</span>`).join("")}</span>`;
+            visual.classList.add("validation-unit-calculation");
+            visual.style.setProperty("--validation-unit-count", units.length);
+            visual.style.setProperty("width", `${2 + units.length * 4.5}rem`);
+            visual.style.setProperty("min-width", `${2 + units.length * 4.5}rem`);
+            visual.innerHTML = `${row("", units, "validation-unit-heading")}${row("", upper)}${row(match[2], lower)}<span class="validation-rule"></span>`;
+          } else {
+            visual.innerHTML = `<span>${match[1]}</span><span>${match[2]} ${match[3]}</span><span class="validation-rule"></span>`;
+          }
         } else if (pageId === "pg079_sec001") {
           const parseCapacity = value => value.trim().match(/^(\d+)\s*L\s*(\d+)\s*mL$/i);
           const upper = parseCapacity(match[1]);
