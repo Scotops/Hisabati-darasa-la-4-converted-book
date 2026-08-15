@@ -13,6 +13,7 @@ import edge_tts
 VOICE = "sw-TZ-RehemaNeural"
 
 SPEECH_OVERRIDES = {
+    "pg134_im002_crop1_crop1": "Mchoro una gridi ya miraba mia moja iliyopangwa katika safu kumi na mistari kumi. Mraba wa kwanza umewekewa kivuli. Mraba huo ni sehemu moja chini ya mia moja ya umbo zima, sawa na desimali sifuri nukta sifuri moja.",
     "pg017_n0002": "Namba za Kirumi, hamsini ya Kirumi hadi mia moja ya Kirumi",
     "pg017_tbl1_r2_c2": "hamsini ya Kirumi",
     "pg017_tbl1_r2_c3": "sitini ya Kirumi",
