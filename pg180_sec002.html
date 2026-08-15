@@ -16,6 +16,13 @@
 
     <style>
       body, p, h1, h2, h3, h4, h5, h6, span, div, button, input, textarea, select { font-family: 'Atkinson Hyperlegible','Merriweather',sans-serif; }
+      .long-division-work { --digit: 1.35rem; display: inline-grid; grid-template-columns: 3.2rem calc(5 * var(--digit)); grid-template-rows: repeat(7, auto); font-family: 'Atkinson Hyperlegible', monospace; font-variant-numeric: tabular-nums lining-nums; font-size: 1.4rem; line-height: 1.2; color: #111827; }
+      .long-division-work .quotient { grid-column: 2; text-align: right; padding-right: .2rem; }
+      .long-division-work .divisor { grid-column: 1; grid-row: 2; text-align: right; padding: .22rem .3rem 0 0; }
+      .long-division-work .dividend { grid-column: 2; grid-row: 2; border-left: 2px solid currentColor; border-top: 2px solid currentColor; padding: .18rem .2rem 0 .35rem; letter-spacing: .08em; text-align: right; }
+      .long-division-work .step { grid-column: 2; justify-self: end; min-width: 3.2rem; padding-right: .2rem; text-align: right; }
+      .long-division-work .subtract { border-bottom: 2px solid currentColor; }
+      @media (max-width: 640px) { .long-division-work { --digit: 1.05rem; grid-template-columns: 2.6rem calc(5 * var(--digit)); font-size: 1.08rem; } }
     </style>    <link href="./assets/book-quality.css?v=13" rel="stylesheet">
 </head>
 
@@ -51,7 +58,16 @@
 
           <div class="mt-4 flex justify-center max-sm:justify-start">
             <div class="rounded-lg px-2 py-1">
-              <p class="font-mono text-[0.98rem] leading-[1.2] text-gray-900 break-all max-sm:text-[0.84rem]" data-id="pg180_n0029"><math><mtable><mtr><mtd class="tml-right" style="padding-left:0pt;padding-right:0pt;"><mn>870</mn></mtd></mtr><mtr><mtd class="tml-right" style="padding-left:0pt;padding-right:0pt;"><mrow><mn>17</mn><menclose notation="top" class="tml-overline"><mrow><mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo><mspace width="0.1667em"></mspace><mn>14790</mn></mrow></menclose></mrow></mtd></mtr><mtr><mtd class="tml-right" style="border-bottom:0.06em solid;padding-left:0pt;padding-right:0pt;"><mrow><mo form="prefix" stretchy="false">âˆ’</mo><mn>136</mn></mrow></mtd></mtr><mtr><mtd class="tml-right" style="padding-left:0pt;padding-right:0pt;"><mn>119</mn></mtd></mtr><mtr><mtd class="tml-right" style="border-bottom:0.06em solid;padding-left:0pt;padding-right:0pt;"><mrow><mo form="prefix" stretchy="false">âˆ’</mo><mn>119</mn></mrow></mtd></mtr><mtr><mtd class="tml-right" style="padding-left:0pt;padding-right:0pt;"><mn>0</mn></mtd></mtr></mtable></math></p>
+              <div class="long-division-work" aria-hidden="true">
+                <div class="quotient">870</div>
+                <div class="divisor">17</div>
+                <div class="dividend">14790</div>
+                <div class="step subtract">−136</div>
+                <div class="step">119</div>
+                <div class="step subtract">−119</div>
+                <div class="step">0</div>
+              </div>
+              <p class="sr-only" data-id="pg180_n0029">14790 gawanya kwa 17 ni 870. Hatua za njia ni: toa 136, baki 119; toa 119, baki sifuri.</p>
             </div>
           </div>
 
