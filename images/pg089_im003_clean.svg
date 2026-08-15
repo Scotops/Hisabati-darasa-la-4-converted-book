@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 730 446" role="img" aria-labelledby="title desc">
+  <title id="title">Maumbo manne ya mraba</title>
+  <desc id="desc">Umbo a lina upande wa sentimeta 45. Umbo b lina upande wa mita 32. Umbo c lina upande wa mita 21. Umbo d lina upande wa sentimeta 40.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#222"/>
+    </marker>
+  </defs>
+  <rect width="730" height="446" fill="#fff"/>
+  <g fill="none" stroke="#222" stroke-width="2">
+    <rect x="95" y="16" width="218" height="218"/>
+    <rect x="518" y="43" width="160" height="160"/>
+    <rect x="187" y="266" width="136" height="136"/>
+    <rect x="478" y="240" width="183" height="183"/>
+    <line x1="329" y1="22" x2="329" y2="228" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <line x1="518" y1="30" x2="678" y2="30" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <line x1="171" y1="272" x2="171" y2="396" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <line x1="676" y1="246" x2="676" y2="417" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="24" fill="#69a84f">
+    <text x="28" y="36">(a)</text><text x="407" y="36">(b)</text>
+    <text x="28" y="286">(c)</text><text x="407" y="286">(d)</text>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="20" fill="#222">
+    <text x="316" y="126" text-anchor="middle" transform="translate(35 0)">sm 45</text>
+    <text x="598" y="22" text-anchor="middle">m 32</text>
+    <text x="146" y="339">m 21</text>
+    <text x="686" y="337">sm 40</text>
+  </g>
+</svg>
