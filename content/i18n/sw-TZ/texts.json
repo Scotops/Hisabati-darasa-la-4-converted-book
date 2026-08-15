@@ -6957,5 +6957,6 @@
   "pg053_remember_2": "Hisa inaweza kuwa na baki au isiwe na baki.",
   "pg053_remember_3": "Katika kugawanya namba, anza kugawanya tarakimu za upande wa kushoto za kigawanywe kuelekea kulia.",
   "pg066_table_summary": "Maelezo ya jedwali. Vipimo kutoka kidogo hadi kikubwa ni miligramu, sentigramu, desigramu, gramu, dekagramu, hektogramu na kilogramu. Kila kipimo kimoja ni sawa na vipimo kumi vya kitengo kilicho upande wake wa kushoto. Sentigramu 1 ni miligramu 10. Desigramu 1 ni sentigramu 10 au miligramu 100. Gramu 1 ni desigramu 10, sentigramu 100 au miligramu 1,000. Dekagramu 1 ni gramu 10. Hektogramu 1 ni dekagramu 10 au gramu 100. Kilogramu 1 ni hektogramu 10, dekagramu 100, gramu 1,000, desigramu 10,000, sentigramu 100,000 au miligramu 1,000,000. Ukihamia safu moja kwenda kulia, gawanya kwa 10. Ukihamia safu moja kwenda kushoto, zidisha kwa 10.",
-  "pg092_diagram001": "Mchoro wa bustani ya maua yenye umbo la mraba. Kila upande wa mraba una urefu wa mita 25. Upande wa juu, chini, kushoto na kulia umeandikwa mita 25."
+  "pg092_diagram001": "Mchoro wa bustani ya maua yenye umbo la mraba. Kila upande wa mraba una urefu wa mita 25. Upande wa juu, chini, kushoto na kulia umeandikwa mita 25.",
+  "pg095_im004_crop_v1_crop1": "Mchoro wa njia yenye umbo la mstatili. Nyumbani ipo kona ya juu kushoto. Shule ipo kona ya juu kulia. Soko lipo kona ya chini kulia. Hospitali ipo kona ya chini kushoto. Umbali kutoka nyumbani hadi shule, kwenye upande wa juu, ni meta 1,780. Umbali kutoka hospitali hadi nyumbani, kwenye upande wa kushoto, ni meta 922."
 }
