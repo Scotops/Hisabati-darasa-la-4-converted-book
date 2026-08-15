@@ -6938,5 +6938,9 @@
   "pg092_diagram001": "pg092_diagram001.mp3?v=diagram1",
   "pg095_im004_crop_v1_crop1": "pg095_im004_crop_v1_crop1.mp3?v=diagram1",
   "pg104_im005_seg001_v1_crop_v1": "pg104_im005_seg001_v1_crop_v1.mp3?v=shapes1",
-  "pg104_im005_seg002_v1_crop_v1_crop1": "pg104_im005_seg002_v1_crop_v1_crop1.mp3?v=shapes1"
+  "pg104_im005_seg002_v1_crop_v1_crop1": "pg104_im005_seg002_v1_crop_v1_crop1.mp3?v=shapes1",
+  "pg108_im006_crop_v1_crop1": "pg108_im006_crop_v1_crop1.mp3?v=shape-desc1",
+  "pg108_im007_crop_v1": "pg108_im007_crop_v1.mp3?v=shape-desc1",
+  "pg108_im008_seg001_v1_crop_v1": "pg108_im008_seg001_v1_crop_v1.mp3?v=shape-desc1",
+  "pg108_im008_seg002_v1_crop_v1": "pg108_im008_seg002_v1_crop_v1.mp3?v=shape-desc1"
 }

@@ -6960,5 +6960,9 @@
   "pg092_diagram001": "Mchoro wa bustani ya maua yenye umbo la mraba. Kila upande wa mraba una urefu wa mita 25. Upande wa juu, chini, kushoto na kulia umeandikwa mita 25.",
   "pg095_im004_crop_v1_crop1": "Mchoro wa njia yenye umbo la mstatili. Nyumbani ipo kona ya juu kushoto. Shule ipo kona ya juu kulia. Soko lipo kona ya chini kulia. Hospitali ipo kona ya chini kushoto. Umbali kutoka nyumbani hadi shule, kwenye upande wa juu, ni meta 1,780. Umbali kutoka hospitali hadi nyumbani, kwenye upande wa kushoto, ni meta 922.",
   "pg104_im005_seg001_v1_crop_v1": "Umbo ni mraba. Upande wa mlalo una urefu wa sentimeta 8 na upande wa wima una urefu wa sentimeta 8.",
-  "pg104_im005_seg002_v1_crop_v1_crop1": "Umbo ni mraba. Upande wa mlalo una urefu wa mita 10 na upande wa wima una urefu wa mita 10."
+  "pg104_im005_seg002_v1_crop_v1_crop1": "Umbo ni mraba. Upande wa mlalo una urefu wa mita 10 na upande wa wima una urefu wa mita 10.",
+  "pg108_im006_crop_v1_crop1": "Pembetatu B D C ina kitako D C chenye urefu wa sentimeta 18 na kimo B D chenye urefu wa sentimeta 14. Kuna pembe mraba katika D.",
+  "pg108_im007_crop_v1": "Pembetatu Z L M ina kitako Z L chenye urefu wa sentimeta 24 na kimo kutoka kitako hadi M chenye urefu wa sentimeta 19.",
+  "pg108_im008_seg001_v1_crop_v1": "Pembetatu R S T ina kitako R S chenye urefu wa mita 10 na kimo R T chenye urefu wa mita 10. Kuna pembe mraba katika R.",
+  "pg108_im008_seg002_v1_crop_v1": "Pembetatu M L N ina kitako M L chenye urefu wa sentimeta 5 na kimo kutoka kitako hadi N chenye urefu wa sentimeta 20."
 }
