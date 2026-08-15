@@ -37,6 +37,12 @@ SPEECH_OVERRIDES = {
     "pg066_n0018": "dekagramu, de a ge",
     "pg066_n0020": "hektogramu, ha ge",
     "pg066_n0022": "kilogramu, ka ge",
+    "pg078_ex_q1": "Swali la kwanza: lita mia nne na kumi na tano, mililita mia mbili na tano; jumlisha lita ishirini na saba, mililita nane.",
+    "pg078_ex_q2": "Swali la pili: lita mia sita, mililita arobaini; jumlisha lita mia tatu na hamsini, mililita mia mbili na hamsini.",
+    "pg078_ex_q3": "Swali la tatu: lita sabini na nane, mililita mia nne na ishirini na sita; jumlisha lita hamsini na tano, mililita mia tano na arobaini na mbili.",
+    "pg078_ex_q4": "Swali la nne: lita nne, mililita mia saba na hamsini; lita mia tatu na kumi na sita, mililita mia mbili na hamsini; jumlisha lita kumi na tano, mililita mia moja na moja.",
+    "pg078_ex_q5": "Swali la tano: lita kumi na saba, mililita mia nane; jumlisha lita tatu, mililita mia tatu na sitini na sita.",
+    "pg078_ex_q6": "Swali la sita: lita ishirini, mililita mia tisa na ishirini; lita kumi na nne, mililita mia moja na kumi na mbili; jumlisha lita kumi na tatu, mililita mia moja na ishirini na sita.",
 }
 
 
