@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 455 285" role="img" aria-labelledby="title desc">
+  <title id="title">Mstatili wenye urefu wa sentimeta 21 na upana wa sentimeta 17</title>
+  <desc id="desc">Mstatili. Upande wa mlalo una sentimeta 21 na upande wa wima una sentimeta 17.</desc>
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse"><path d="M0 0L8 4L0 8Z" fill="#222"/></marker></defs>
+  <rect width="455" height="285" fill="#eef3e8"/>
+  <g fill="none" stroke="#222" stroke-width="3">
+    <rect x="92" y="50" width="330" height="218"/>
+    <line x1="72" y1="55" x2="72" y2="263" marker-start="url(#a)" marker-end="url(#a)"/>
+    <line x1="96" y1="32" x2="418" y2="32" marker-start="url(#a)" marker-end="url(#a)"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="28" fill="#222">
+    <text x="7" y="168">sm 17</text><text x="257" y="27" text-anchor="middle">sm 21</text>
+  </g>
+</svg>

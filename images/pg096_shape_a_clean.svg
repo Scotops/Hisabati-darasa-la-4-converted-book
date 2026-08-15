@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 225" role="img" aria-labelledby="title desc">
+  <title id="title">Mstatili wenye urefu wa mita 19 na upana wa mita 7</title>
+  <desc id="desc">Mstatili. Upande wa mlalo una mita 19 na upande wa wima una mita 7.</desc>
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse"><path d="M0 0L8 4L0 8Z" fill="#222"/></marker></defs>
+  <rect width="520" height="225" fill="#eef3e8"/>
+  <g fill="none" stroke="#222" stroke-width="3">
+    <rect x="72" y="25" width="400" height="150"/>
+    <line x1="50" y1="28" x2="50" y2="172" marker-start="url(#a)" marker-end="url(#a)"/>
+    <line x1="75" y1="202" x2="469" y2="202" marker-start="url(#a)" marker-end="url(#a)"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="29" fill="#222">
+    <text x="15" y="111">m 7</text><text x="272" y="218" text-anchor="middle">m 19</text>
+  </g>
+</svg>
