@@ -16,6 +16,22 @@
 
     <style>
       body, p, h1, h2, h3, h4, h5, h6, span, div, button, input, textarea, select { font-family: 'Atkinson Hyperlegible','Merriweather',sans-serif; }
+      .money-long-division {
+        display: inline-grid;
+        grid-template-columns: 2.7rem 3.8rem 3.8rem;
+        align-items: end;
+        color: #111827;
+        font-variant-numeric: tabular-nums lining-nums;
+        font-size: 1.2rem;
+        line-height: 1.15;
+        text-align: right;
+        white-space: nowrap;
+      }
+      .money-long-division > span { padding: .12rem .35rem; }
+      .money-long-division .unit { font-size: .82em; font-weight: 700; text-align: center; }
+      .money-long-division .divisor { padding-right: .05rem; }
+      .money-long-division .dividend { border-top: 2px solid currentColor; padding-top: .22rem; }
+      .money-long-division .answer { font-weight: 700; }
     </style>    <link href="./assets/book-quality.css?v=13" rel="stylesheet">
 </head>
 
@@ -34,16 +50,14 @@
 
       <div class="text-lg font-bold text-gray-900 mb-2" data-id="pg179_n0004">Njia</div>
 
-      <table class="text-lg leading-snug text-gray-900 border-collapse mb-4">
-        <tbody>
-          <tr><td class="pr-8 font-semibold" data-id="pg179_n0006">sh</td><td class="font-semibold">st</td></tr>
-          <tr>
-            <td class="pr-8" data-id="pg179_n0007"><span class="border-t-2 border-gray-900 pl-1">5<span class="pl-1">)80</span></span></td>
-            <td>75</td>
-          </tr>
-          <tr><td class="pr-8 font-semibold" data-id="pg179_n0008">16</td><td class="font-semibold">15</td></tr>
-        </tbody>
-      </table>
+      <div class="money-long-division mb-4" aria-hidden="true">
+        <span></span><span class="unit">sh</span><span class="unit">st</span>
+        <span class="divisor">5)</span><span class="dividend">80</span><span class="dividend">75</span>
+        <span></span><span class="answer">16</span><span class="answer">15</span>
+      </div>
+      <span class="sr-only" data-id="pg179_n0006">sh, st</span>
+      <span class="sr-only" data-id="pg179_n0007">5)80 75</span>
+      <span class="sr-only" data-id="pg179_n0008">16 15</span>
 
       <div class="text-lg text-gray-900" data-id="pg179_n0009">Kwa hiyo, jibu ni sh 16.15.</div>
     </div>
