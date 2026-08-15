@@ -279,6 +279,20 @@
           const fractionMarkup = parts => `<span class="validation-fraction"><span>${parts[0]}</span><span>${parts[1]}</span></span>`;
           const operator = expression.match(/\+|\-|\u00d7|\u00f7|\u2212|x/i)?.[0] || "\u00d7";
           visual.innerHTML = `<span>${fractionMarkup(fractionPairs[0])}</span><span>${operator} ${fractionMarkup(fractionPairs[1])}</span><span class="validation-rule"></span>`;
+        } else if (pageId === "pg162_sec001") {
+          const upper = match[1].trim().match(/^saa\s+dakika\s+(\d+)\s+(\d+)$/i);
+          const lower = match[3].trim().match(/^(\d+)\s+(\d+)$/);
+          if (upper && lower) {
+            const row = (lead, hour, minute, extraClass = "") =>
+              `<span class="validation-unit-row ${extraClass}"><span>${lead}</span><span>${hour}</span><span>${minute}</span></span>`;
+            visual.classList.add("validation-unit-calculation", "validation-time-calculation");
+            visual.style.setProperty("--validation-unit-count", 2);
+            visual.style.setProperty("width", "11rem");
+            visual.style.setProperty("min-width", "11rem");
+            visual.innerHTML = `${row("", "saa", "dakika", "validation-unit-heading")}${row("", upper[1], upper[2])}${row(match[2], lower[1], lower[2])}<span class="validation-rule"></span>`;
+          } else {
+            visual.innerHTML = `<span>${match[1]}</span><span>${match[2]} ${match[3]}</span><span class="validation-rule"></span>`;
+          }
         } else if (pageId === "pg082_sec001") {
           const leftTokens = match[1].trim().split(/\s+/);
           const firstNumber = leftTokens.findIndex(token => /^\d/.test(token));

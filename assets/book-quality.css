@@ -133,6 +133,16 @@ math mtd { text-align: right; }
   text-align: center;
 }
 
+/* Keep each hour value below saa and each minute value below dakika. */
+.validation-vertical-stack:has(.validation-time-calculation) {
+  min-width: 11rem;
+}
+
+.validation-vertical-stack:has(.validation-time-calculation) > input[data-activity-item],
+.validation-vertical-stack:has(.validation-time-calculation) > textarea[data-activity-item] {
+  width: 11rem !important;
+}
+
 #content .review-exercise-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
