@@ -6810,9 +6810,9 @@
   "pg096_im005_seg001_v1_crop_v1_crop1": "Mstatili. Upande wa mlalo una urefu wa mita 19 na upande wa wima una urefu wa mita 7.",
   "pg096_im005_seg002_v1_crop_v1_crop1": "Mraba. Kila upande una urefu wa mita 8.",
   "pg096_im005_seg003_v1_crop_v1_crop1": "Mstatili. Upande wa mlalo una urefu wa sentimeta 21 na upande wa wima una urefu wa sentimeta 17.",
-  "pg097_im006_crop_v1": "Mchoro wa pembetatu wenye vipimo",
-  "pg097_im001": "Mraba A",
-  "pg097_im002": "Mstatili B",
+  "pg097_im006_crop_v1": "Umbo d ni pembetatu yenye pande za sentimeta 9, sentimeta 7 na sentimeta 18.",
+  "pg097_im001": "Umbo A ni mraba.",
+  "pg097_im002": "Umbo B ni mstatili ulioundwa kwa kuunganisha miraba A miwili.",
   "pg099_im005_crop_v1": "Fikiri",
   "pg106_im004_crop_v1_crop1": "Pembetatu PQR",
   "pg110_im005_crop_v1": "Figure for question 2",
@@ -6969,5 +6969,11 @@
   "pg108_im006_crop_v1_crop1": "Pembetatu B D C ina kitako D C chenye urefu wa sentimeta 18 na kimo B D chenye urefu wa sentimeta 14. Kuna pembe mraba katika D.",
   "pg108_im007_crop_v1": "Pembetatu Z L M ina kitako Z L chenye urefu wa sentimeta 24 na kimo kutoka kitako hadi M chenye urefu wa sentimeta 19.",
   "pg108_im008_seg001_v1_crop_v1": "Pembetatu R S T ina kitako R S chenye urefu wa mita 10 na kimo R T chenye urefu wa mita 10. Kuna pembe mraba katika R.",
-  "pg108_im008_seg002_v1_crop_v1": "Pembetatu M L N ina kitako M L chenye urefu wa sentimeta 5 na kimo kutoka kitako hadi N chenye urefu wa sentimeta 20."
+  "pg108_im008_seg002_v1_crop_v1": "Pembetatu M L N ina kitako M L chenye urefu wa sentimeta 5 na kimo kutoka kitako hadi N chenye urefu wa sentimeta 20.",
+  "pg087_im003_crop_v1_crop1": "Umbo a ni mstatili wenye urefu wa sentimeta 10 na upana wa sentimeta 4.",
+  "pg087_im004_crop1": "Umbo b ni mstatili wenye urefu wa sentimeta 18 na upana wa sentimeta 8.",
+  "pg087_im005_crop_v1_crop1": "Umbo c ni mstatili wenye urefu wa sentimeta 16 na upana wa sentimeta 5.",
+  "pg087_im006_crop1": "Umbo d ni mstatili wenye urefu wa sentimeta 15 na upana wa sentimeta 7.",
+  "pg088_diagram001": "Mchoro wa mraba wenye kila upande wa sentimeta 20.",
+  "pg098_im001": "Mchoro wa zulia lenye umbo la mstatili. Urefu wake ni mita 7 na upana wake ni mita 5."
 }

@@ -28,6 +28,42 @@
     const pageId = document.querySelector('meta[name="title-id"]')?.content;
 
     /*
+     * The reader's page-audio collector does not consistently include text
+     * IDs attached directly to images.  Put every meaningful diagram in the
+     * perimeter chapter into a narration-safe text node immediately after
+     * the image.  The visible image keeps its alt text for screen readers,
+     * while the hidden node supplies the ordered book narration and audio.
+     */
+    const narratedShapeIds = new Set([
+      "pg087_im003_crop_v1_crop1", "pg087_im004_crop1",
+      "pg087_im005_crop_v1_crop1", "pg087_im006_crop1",
+      "pg089_im003_crop1", "pg090_im005", "pg092_diagram001",
+      "pg093_im005_crop_v1_crop1", "pg095_im004_crop_v1_crop1",
+      "pg096_im005_seg001_v1_crop_v1_crop1",
+      "pg096_im005_seg002_v1_crop_v1_crop1",
+      "pg096_im005_seg003_v1_crop_v1_crop1",
+      "pg097_im006_crop_v1", "pg097_im001", "pg097_im002",
+      "pg098_im001"
+    ]);
+    const shapeAltOverrides = {
+      pg097_im006_crop_v1: "Umbo d ni pembetatu yenye pande za sentimeta 9, sentimeta 7 na sentimeta 18.",
+      pg097_im001: "Umbo A ni mraba.",
+      pg097_im002: "Umbo B ni mstatili ulioundwa kwa kuunganisha miraba A miwili."
+    };
+    document.querySelectorAll("img[data-id]").forEach(image => {
+      const textId = image.dataset.id;
+      if (!narratedShapeIds.has(textId)) return;
+      const fallback = shapeAltOverrides[textId] || image.getAttribute("alt") || "";
+      image.setAttribute("alt", fallback);
+      const narration = document.createElement("span");
+      narration.className = "sr-only diagram-narration";
+      narration.dataset.id = textId;
+      narration.textContent = fallback;
+      image.removeAttribute("data-id");
+      image.insertAdjacentElement("afterend", narration);
+    });
+
+    /*
      * A number of converted place-value calculations use preserved spaces to
      * keep unit columns together (for example "tani   kg" / "12   740").
      * The page font is proportional, so those columns can drift when the
