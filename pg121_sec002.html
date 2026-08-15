@@ -16,13 +16,53 @@
 
     <style>
       body, p, h1, h2, h3, h4, h5, h6, span, div, button, input, textarea, select { font-family: 'Atkinson Hyperlegible','Merriweather',sans-serif; }
+      #pg121-fraction-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        column-gap: 2.25rem;
+        row-gap: 2rem;
+      }
+      #pg121-fraction-grid > div {
+        min-height: 0 !important;
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        min-width: 0;
+      }
+      #pg121-fraction-grid > div > div {
+        display: flex;
+        flex-wrap: nowrap !important;
+        align-items: center;
+        gap: 0.45rem;
+        white-space: nowrap;
+      }
+      #pg121-fraction-grid > div > div > span:first-child {
+        color: #78ad61;
+        min-width: 2.25rem;
+      }
+      #pg121-fraction-grid input {
+        width: 4.75rem !important;
+        min-width: 4.75rem;
+        height: 2.2rem;
+        margin-top: 0 !important;
+        border: 1.5px solid #22c55e !important;
+        border-radius: 0.55rem;
+        background: #fff !important;
+        padding: 0.2rem 0.35rem !important;
+      }
+      @media (max-width: 900px) {
+        #pg121-fraction-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+      @media (max-width: 600px) {
+        #pg121-fraction-grid { grid-template-columns: 1fr; row-gap: 1.25rem; }
+      }
     </style>    <link href="./assets/book-quality.css?v=13" rel="stylesheet">
 </head>
 
 <body class="min-h-screen flex items-center justify-center">
     <main class="w-full">
       <h1 class="sr-only" id="page-heading">Zoezi la nne</h1>
-      <div class="container mx-auto max-w-5xl bg-white rounded-lg px-10 max-lg:px-8 max-sm:px-4 pt-8 pb-12 opacity-0" id="content">
+      <div class="container mx-auto max-w-6xl bg-white rounded-lg px-10 max-lg:px-8 max-sm:px-4 pt-8 pb-12 opacity-0" id="content">
 <section data-section-type="activity_fill_in_the_blank" data-section-id="pg121_sec002" class="max-w-6xl mx-auto">
   <div class="mb-6 flex justify-start pl-6 max-lg:pl-4 max-sm:pl-0 max-sm:justify-center">
     <div class="bg-gradient-to-b from-pink-200 to-pink-100 border-2 border-pink-500 rounded-[28px] px-16 py-4 max-lg:px-12 max-lg:py-3 max-sm:px-8 max-sm:py-3 shadow-sm">
@@ -35,7 +75,7 @@
   </p>
 
   <div class="border border-pink-200 rounded-[34px] bg-white px-10 py-12 max-lg:px-7 max-lg:py-10 max-sm:px-4 max-sm:py-6">
-    <div style="width:100%;margin-inline:auto;" class="book-source-grid grid grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1 gap-y-10">
+    <div id="pg121-fraction-grid" style="width:100%;margin-inline:auto;" class="book-source-grid">
 
       <div class="min-h-[100px] max-sm:min-h-0">
         <div class="flex items-center gap-2 flex-wrap text-[22px] text-black max-lg:text-[19px] max-sm:text-[17px]" data-id="pg121_n0022">
@@ -248,7 +288,7 @@
     <div class="relative z-50" id="nav-container"></div>
     <script src="./assets/offline-preloader.js"></script>
     <script src="./assets/scorm.js"></script>
-    <script src="./assets/book-quality.js?v=28"></script>
+    <script src="./assets/book-quality.js?v=30"></script>
     <script src="./assets/base.bundle.local.js"></script>
 </body>
 
