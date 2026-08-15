@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 500" role="img" aria-labelledby="title desc">
+  <title id="title">Pembetatu PQR</title>
+  <desc id="desc">Pembetatu PQR ina kitako QR cha sentimeta 10 na kimo QP cha sentimeta 7.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#202020"/>
+    </marker>
+  </defs>
+  <rect width="760" height="500" fill="#fff"/>
+  <g fill="none" stroke="#202020" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M190 80 L190 400 L650 400 Z"/>
+    <path d="M160 90 L160 390" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <path d="M195 430 L645 430" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <path d="M150 80 H170 M150 400 H170 M190 420 V440 M650 420 V440" stroke-width="3"/>
+  </g>
+  <g fill="#202020" font-family="Atkinson Hyperlegible, Arial, sans-serif" font-size="38">
+    <text x="174" y="62">P</text>
+    <text x="166" y="438">Q</text>
+    <text x="660" y="414">R</text>
+    <text x="62" y="258">sm 7</text>
+    <text x="365" y="480">sm 10</text>
+  </g>
+</svg>
