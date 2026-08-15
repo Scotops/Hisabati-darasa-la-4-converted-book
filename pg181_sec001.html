@@ -16,6 +16,14 @@
 
     <style>
       body, p, h1, h2, h3, h4, h5, h6, span, div, button, input, textarea, select { font-family: 'Atkinson Hyperlegible','Merriweather',sans-serif; }
+      .money-division { display:inline-grid; grid-template-columns:3.1rem 7.25rem 4.25rem; grid-template-rows:auto auto auto; align-items:end; font-family:'Atkinson Hyperlegible',monospace; font-variant-numeric:tabular-nums lining-nums; font-size:1.35rem; line-height:1.15; color:#111827; text-align:right; }
+      .money-division > span { padding:.14rem .35rem; }
+      .money-division .unit { font-size:.82em; font-weight:700; text-align:center; }
+      .money-division .divisor { padding-right:.08rem; }
+      .money-division .dividend-sh { border-top:2px solid currentColor; border-left:2px solid currentColor; padding-top:.22rem; }
+      .money-division .dividend-st { border-top:2px solid currentColor; padding-top:.22rem; }
+      .money-division .answer { font-weight:600; }
+      @media (max-width:640px) { .money-division { grid-template-columns:2.6rem 5.5rem 3.6rem; font-size:1.08rem; } }
     </style>    <link href="./assets/book-quality.css?v=13" rel="stylesheet">
 </head>
 
@@ -46,9 +54,14 @@
           </div>
 
           <div class="mt-5 z-10 relative text-center">
-            <p class="text-[1.05rem] leading-tight text-gray-800 font-mono whitespace-pre" data-id="pg181_n0013">sh        st</p>
-            <p class="text-[1.05rem] leading-tight text-gray-800 font-mono whitespace-pre" data-id="pg181_n0014">38)17126  60</p>
-            <p class="text-[1.05rem] leading-tight text-gray-800 font-mono whitespace-pre" data-id="pg181_n0015">450  70</p>
+            <div class="money-division" aria-hidden="true">
+              <span></span><span class="unit">sh</span><span class="unit">st</span>
+              <span class="divisor">38)</span><span class="dividend-sh">17126</span><span class="dividend-st">60</span>
+              <span></span><span class="answer">450</span><span class="answer">70</span>
+            </div>
+            <p class="sr-only" data-id="pg181_n0013">shilingi na senti</p>
+            <p class="sr-only" data-id="pg181_n0014">17126 shilingi na senti 60 gawanya kwa 38</p>
+            <p class="sr-only" data-id="pg181_n0015">Jibu ni shilingi 450 na senti 70</p>
           </div>
 
           <div class="mt-4 z-10 relative">
