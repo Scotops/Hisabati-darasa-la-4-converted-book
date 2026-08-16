@@ -357,6 +357,31 @@ input[data-answer-state="incorrect"], textarea[data-answer-state="incorrect"] {
   border-bottom: 0.075em solid currentColor;
 }
 
+/* Worked long division must preserve the complete school-book structure:
+   quotient above the vinculum, divisor outside, dividend inside, followed by
+   every subtraction and remainder row.  The modifier keeps two money-column
+   calculations readable when they sit beside one another. */
+.chapter-long-division-work--compact {
+  font-size: clamp(1.05rem, 2.2vw, 1.55rem);
+}
+
+.chapter-long-division-work__label {
+  grid-column: 1 / -1;
+  justify-self: center;
+  margin-bottom: .2rem;
+  font-family: 'Atkinson Hyperlegible', Arial, sans-serif;
+  font-size: .72em;
+  font-weight: 700;
+}
+
+.chapter-long-division-pair {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2.25rem;
+}
+
 /* Keep read-aloud highlighters from wrapping the visible digits and
    dismantling the two-column long-division grid. Narration remains on the
    adjacent sr-only data-id element. */
