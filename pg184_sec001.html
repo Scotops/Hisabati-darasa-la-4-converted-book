@@ -12,19 +12,19 @@
   <link href="./assets/book-quality.css?v=13" rel="stylesheet">
   <style>
     body, p, span, div, button, input { font-family:'Atkinson Hyperlegible','Merriweather',sans-serif; }
-    .review-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:2.5rem 2.25rem; }
+    .review-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:2.5rem 1.4rem; }
     .question { display:grid; grid-template-columns:3rem minmax(0,1fr); gap:.75rem; align-items:start; }
     .question-number { color:#7ab56a; font-size:1.95rem; line-height:1; font-weight:500; }
-    .linear-question { display:flex; align-items:center; gap:.65rem; min-height:4.5rem; font-size:1.08rem; font-variant-numeric:tabular-nums; }
+    .linear-question { display:grid; grid-template-columns:minmax(0,1fr) 6.5rem; align-items:center; gap:.65rem; min-height:4.5rem; font-size:1.08rem; font-variant-numeric:tabular-nums; }
     .linear-question span { white-space:nowrap; }
     .linear-question input { flex:0 0 6.5rem; min-width:0; }
-    .money-long-division { width:13rem; max-width:100%; margin:0 auto .8rem; display:grid; grid-template-columns:3.3rem 1fr 2.8rem; grid-template-rows:auto auto; align-items:end; font-variant-numeric:tabular-nums; }
+    .money-long-division { width:13rem; max-width:100%; margin:0 auto .8rem; display:grid; grid-template-columns:3rem minmax(0,1fr) 3.1rem; grid-template-rows:auto auto; align-items:end; font-variant-numeric:tabular-nums; }
     .money-long-division .unit { text-align:center; font-weight:600; margin-bottom:.35rem; }
     .money-long-division .unit.sh { grid-column:2; }
     .money-long-division .unit.st { grid-column:3; }
     .money-long-division .divisor { grid-column:1; grid-row:2; text-align:right; padding:0 .35rem .15rem 0; font-size:1.2rem; }
     .money-long-division .dividend { grid-column:2; grid-row:2; border-top:2px solid #111; border-left:2px solid #111; padding:.08rem .35rem .15rem .45rem; text-align:right; font-size:1.2rem; }
-    .money-long-division .cents { grid-column:3; grid-row:2; border-bottom:2px solid #111; padding:0 .1rem .15rem .3rem; text-align:center; font-size:1.2rem; }
+    .money-long-division .cents { grid-column:3; grid-row:2; border-top:2px solid #111; padding:.08rem .1rem .15rem .3rem; text-align:center; font-size:1.2rem; }
     .answer-pair { width:13rem; max-width:100%; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:.65rem; }
     .answer-pair input { width:100%; }
     .story-list { grid-column:1/-1; display:grid; gap:1.5rem; }
@@ -33,15 +33,15 @@
     .story-copy input { margin-top:.55rem; width:100%; }
     .answer { height:2.7rem; border:1px solid #9ca3af; border-radius:.45rem; background:transparent; padding:.35rem .7rem; text-align:center; }
     .visually-hidden { position:absolute !important; width:1px !important; height:1px !important; padding:0 !important; margin:-1px !important; overflow:hidden !important; clip:rect(0,0,0,0) !important; white-space:nowrap !important; border:0 !important; }
-    @media (max-width:900px) { .review-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
-    @media (max-width:640px) { .review-grid { grid-template-columns:1fr; gap:1.8rem; } .question,.story-question { grid-template-columns:2.6rem minmax(0,1fr); } }
+    @media (max-width:720px) { .review-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:500px) { .review-grid { grid-template-columns:1fr; gap:1.8rem; } .question,.story-question { grid-template-columns:2.6rem minmax(0,1fr); } }
   </style>
 </head>
 <body class="min-h-screen flex items-center justify-center">
   <main class="w-full">
     <h1 class="sr-only" id="page-heading">Hisabati: Kitabu cha Mwanafunzi Darasa la Nne</h1>
     <div id="content" class="container mx-auto max-w-5xl bg-white px-6 pt-6 pb-8 opacity-0 max-lg:px-5 max-sm:px-2">
-      <section data-section-type="activity_fill_in_the_blank" data-section-id="pg184_sec001" class="mx-auto max-w-4xl rounded-[2rem] bg-[#edf3ea] px-7 py-8 shadow-sm max-lg:px-5 max-sm:rounded-[1.5rem] max-sm:px-4">
+      <section data-section-type="activity_fill_in_the_blank" data-section-id="pg184_sec001" class="mx-auto max-w-5xl rounded-[2rem] bg-[#edf3ea] px-7 py-8 shadow-sm max-lg:px-5 max-sm:rounded-[1.5rem] max-sm:px-4">
         <div class="review-grid">
           <div class="question">
             <span class="question-number" data-id="pg184_n0002">10.</span>
@@ -54,7 +54,7 @@
           <div class="question">
             <span class="question-number" data-id="pg184_n0008">12.</span>
             <div>
-              <span class="visually-hidden" data-id="pg184_n0010">sh</span><span class="visually-hidden" data-id="pg184_n0011">st</span><span class="visually-hidden" data-id="pg184_n0012">18)44284 ÷ 14</span>
+              <span class="visually-hidden" data-id="pg184_n0010">sh</span><span class="visually-hidden" data-id="pg184_n0011">st</span><span class="visually-hidden" data-id="pg184_n0012">Shilingi 44284 na senti 14 gawanya kwa 18</span>
               <div class="money-long-division" aria-hidden="true"><span class="unit sh">sh</span><span class="unit st">st</span><span class="divisor">18)</span><span class="dividend">44284</span><span class="cents">14</span></div>
               <div class="answer-pair"><input class="answer" data-aria-id="aria-1-0-2" data-activity-item="item-3" aria-label="Shilingi swali la 12" type="text"><input class="answer" data-aria-id="aria-1-0-3" data-activity-item="item-4" aria-label="Senti swali la 12" type="text"></div>
             </div>
@@ -62,7 +62,7 @@
           <div class="question">
             <span class="question-number" data-id="pg184_n0014">13.</span>
             <div>
-              <span class="visually-hidden" data-id="pg184_n0016">sh</span><span class="visually-hidden" data-id="pg184_n0017">st</span><span class="visually-hidden" data-id="pg184_n0018">19)95460 ÷ 37</span>
+              <span class="visually-hidden" data-id="pg184_n0016">sh</span><span class="visually-hidden" data-id="pg184_n0017">st</span><span class="visually-hidden" data-id="pg184_n0018">Shilingi 95460 na senti 37 gawanya kwa 19</span>
               <div class="money-long-division" aria-hidden="true"><span class="unit sh">sh</span><span class="unit st">st</span><span class="divisor">19)</span><span class="dividend">95460</span><span class="cents">37</span></div>
               <div class="answer-pair"><input class="answer" data-aria-id="aria-1-0-4" data-activity-item="item-5" aria-label="Shilingi swali la 13" type="text"><input class="answer" data-aria-id="aria-1-0-5" data-activity-item="item-6" aria-label="Senti swali la 13" type="text"></div>
             </div>
@@ -70,7 +70,7 @@
           <div class="question">
             <span class="question-number" data-id="pg184_n0020">14.</span>
             <div>
-              <span class="visually-hidden" data-id="pg184_n0022">sh</span><span class="visually-hidden" data-id="pg184_n0023">st</span><span class="visually-hidden" data-id="pg184_n0024">13)7653 ÷ 62</span>
+              <span class="visually-hidden" data-id="pg184_n0022">sh</span><span class="visually-hidden" data-id="pg184_n0023">st</span><span class="visually-hidden" data-id="pg184_n0024">Shilingi 7653 na senti 62 gawanya kwa 13</span>
               <div class="money-long-division" aria-hidden="true"><span class="unit sh">sh</span><span class="unit st">st</span><span class="divisor">13)</span><span class="dividend">7653</span><span class="cents">62</span></div>
               <div class="answer-pair"><input class="answer" data-aria-id="aria-1-0-6" data-activity-item="item-7" aria-label="Shilingi swali la 14" type="text"><input class="answer" data-aria-id="aria-1-0-7" data-activity-item="item-8" aria-label="Senti swali la 14" type="text"></div>
             </div>
@@ -78,7 +78,7 @@
           <div class="question">
             <span class="question-number" data-id="pg184_n0026">15.</span>
             <div>
-              <span class="visually-hidden" data-id="pg184_n0028">sh</span><span class="visually-hidden" data-id="pg184_n0029">st</span><span class="visually-hidden" data-id="pg184_n0030">14)19007 ÷ 66</span>
+              <span class="visually-hidden" data-id="pg184_n0028">sh</span><span class="visually-hidden" data-id="pg184_n0029">st</span><span class="visually-hidden" data-id="pg184_n0030">Shilingi 19007 na senti 66 gawanya kwa 14</span>
               <div class="money-long-division" aria-hidden="true"><span class="unit sh">sh</span><span class="unit st">st</span><span class="divisor">14)</span><span class="dividend">19007</span><span class="cents">66</span></div>
               <div class="answer-pair"><input class="answer" data-aria-id="aria-1-0-8" data-activity-item="item-9" aria-label="Shilingi swali la 15" type="text"><input class="answer" data-aria-id="aria-1-0-9" data-activity-item="item-10" aria-label="Senti swali la 15" type="text"></div>
             </div>
