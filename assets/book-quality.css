@@ -598,3 +598,10 @@ input[data-answer-state="incorrect"], textarea[data-answer-state="incorrect"] {
   white-space: nowrap !important;
   border: 0 !important;
 }
+/* Static print-book answer spaces: retain the original line/box appearance but
+   never accept focus or student input. */
+.adt-static-answer-space {
+  display: inline-block;
+  pointer-events: none;
+  user-select: none;
+}

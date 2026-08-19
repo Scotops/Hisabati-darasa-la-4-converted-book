@@ -40,27 +40,11 @@
 </div></div>
     </main>
 
-    <script>
-      (() => {
-        const answers = ["9/2", "6", "25", "12", "3", "6", "2", "4/5", "10", "3", "12", "4", "5/6", "5", "5", "9/11", "1", "2"];
-        const questions = [...document.querySelectorAll('#content .grid > div')];
-        questions.forEach((question, index) => {
-          question.classList.add('flex-wrap', 'items-center', 'rounded-xl', 'border', 'border-pink-100', 'p-3');
-          const input = document.createElement('input');
-          input.type = 'text';
-          input.className = 'validation-pg123-answer mt-3 h-12 w-full rounded-xl border-2 border-green-300 bg-white px-3 text-xl';
-          input.dataset.activityItem = `item-${index + 1}`;
-          input.dataset.ariaId = `aria-123-${index + 1}`;
-          input.setAttribute('aria-label', `Jibu la swali la ${index + 1}`);
-          question.appendChild(input);
-        });
-        window.correctAnswers = Object.fromEntries(answers.map((answer, index) => [`item-${index + 1}`, answer]));
-      })();
-    </script>
+
 
     <div class="relative z-50" id="interface-container"></div>
     <div class="relative z-50" id="nav-container"></div>
-    <script src="./assets/offline-preloader.js?v=184"></script>
+    <script src="./assets/offline-preloader.js?v=185"></script>
     <script src="./assets/scorm.js"></script>
     <script src="./assets/book-quality.js?v=28"></script>
     <script src="./assets/base.bundle.local.js"></script>

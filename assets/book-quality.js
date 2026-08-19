@@ -1,5 +1,6 @@
 /* Small, runtime-independent safeguards for converted mathematics activities. */
 (() => {
+  const staticBookMode = true;
   const pageAnswers = { ...(window.correctAnswers || {}) };
   const answerAlternatives = { ...(window.answerAlternatives || {}) };
   const normalize = value => String(value ?? "")
@@ -359,7 +360,7 @@
           visual.innerHTML = `<span>${match[1]}</span><span>${match[2]} ${match[3]}</span><span class="validation-rule"></span>`;
         }
         source.insertAdjacentElement("afterend", visual);
-        if (!document.querySelector(`[data-activity-item="item-${item}"]`)) {
+        if (!staticBookMode && !document.querySelector(`[data-activity-item="item-${item}"]`)) {
           const input = document.createElement("input");
           input.type = "text";
           input.dataset.activityItem = `item-${item}`;
@@ -434,6 +435,16 @@
       const match = row.textContent.replace(/[−–—]/g, "-").match(/^\[\[blank:(item-\d+)\]\]$/);
       if (!match || document.querySelector(`[data-activity-item="${match[1]}"]`)) return;
       const math = row.closest("math");
+      if (staticBookMode) {
+        const space = document.createElement("span");
+        space.className = "adt-static-answer-space mx-2 inline-block h-11 w-28 rounded-xl border-2 border-green-300 bg-white align-middle";
+        space.setAttribute("aria-hidden", "true");
+        row.textContent = "";
+        const anchor = insertedAfterMath.get(math) || math;
+        anchor.insertAdjacentElement("afterend", space);
+        insertedAfterMath.set(math, space);
+        return;
+      }
       const input = document.createElement("input");
       input.type = "text";
       input.dataset.activityItem = match[1];
@@ -479,7 +490,7 @@
       if (operator.textContent.trim() === "/") operator.textContent = "÷";
     });
 
-    document.addEventListener("click", event => {
+    if (!staticBookMode) document.addEventListener("click", event => {
       const button = event.target.closest("button");
       if (!button || normalize(button.textContent) !== "tuma") return;
       document.querySelectorAll("[data-activity-item]").forEach(field => {
